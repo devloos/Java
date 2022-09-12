@@ -28,34 +28,22 @@ import java.util.Scanner;
 
 class Exercise03_21 {
     public static void main(String[] args) {
-        Scanner cin = new Scanner(System.in);
+        Scanner input = new Scanner(System.in);
+
+        int longest = 0;
+        int count = 0;
         
-        System.out.print("Enter year: (e.g., 2012): ");
-        int Year = cin.nextInt();
-        System.out.print("Enter month: 1-12: ");
-        int Month = cin.nextInt();
-        switch (Month) {
-            case 1: {
-                Month = 13;
-                --Year;
-                break;
+        int len;
+
+        while (input.hasNext()) {
+            len = input.next().length();
+            if (len == longest) {
+                ++count;
+            } else {
+                count = 1;
             }
-            case 2: {
-                Month = 14;
-                --Year;
-                break;
-            }
-            default: {
-                break;
-            }
+            longest = (len > longest) ? len : longest;
         }
-        System.out.print("Enter the day of the month: 1-31: ");
-        int Day = cin.nextInt();
-        
-        String[] WeekDays = {"Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
-        // (q + 26(m+1)/10 + k + k/4 + j/4 + 5j) % 7
-        Day = ((Day + 26 * (Month + 1) / 10) + (Year % 100) + (Year % 100) / 4 + (Year / 100) / 4 + 5 * (Year / 100)) % 7;
-        System.out.print("Day of the week is " + WeekDays[Day]);
     }
     //public int Format(int & ) {
         
