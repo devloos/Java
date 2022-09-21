@@ -1,7 +1,10 @@
+import java.util.*;
+
 class SumSlidingWindow {
   public static void main(String[] args) {
     int[] array = {2, 1, 3, 5, 15, 1, 4, 5, 6};
     int subArraySize = 3;
+    System.out.println("The array: " + Arrays.toString(array));
     System.out.println("The largest sum is: " + largestSubArray(array, subArraySize));
   }
 

@@ -1,0 +1,5 @@
+Please enter the first number: 5
+Please enter the second number: 7
+Please enter the third (and largest) number: 200
+
+The average of 5.0, 7.0, and 200.0 is 70.66666666666667
