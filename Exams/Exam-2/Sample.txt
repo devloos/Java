@@ -1,0 +1,50 @@
+Please enter a positive integer for the loan amount: 100000 
+Please enter a positive number for the annual interest rate: 6.75 
+Please enter a positive integer for the term in years: 30 
+ 
+For a loan with these characteristics: 
+  $  100000 
+  6.75 annual interest rate 
+  30 year term 
+ 
+The Monthly Payment = $  648.60 
+The Total Amount Paid = $233495.31 
+The Total Interest Paid = $133495.31 
+ 
+ 
+Please enter a positive integer for the loan amount: -5 
+RETRY: Please enter a positive integer for the loan amount: -10 
+RETRY: Please enter a positive integer for the loan amount: 500000 
+Please enter a positive number for the annual interest rate: -6 
+RETRY: Please enter a positive number for the annual interest rate: -4 
+RETRY: Please enter a positive number for the annual interest rate: 6   
+Please enter a positive integer for the term in years: -4 
+RETRY: Please enter a positive integer for the term in years: -3 
+RETRY: Please enter a positive integer for the term in years: 40 
+ 
+For a loan with these characteristics: 
+  $  500000 
+  6.00 annual interest rate 
+  40 year term 
+ 
+The Monthly Payment = $ 2751.07 
+The Total Amount Paid = $1320512.74 
+The Total Interest Paid = $820512.74 
+ 
+ 
+Please enter a positive integer for the loan amount: 540000 
+Please enter a positive number for the annual interest rate: 3.85 
+Please enter a positive integer for the term in years: 30 
+ 
+For a loan with these characteristics: 
+  $  540000 
+  3.85 annual interest rate 
+  30 year term 
+ 
+The Monthly Payment = $ 2531.56 
+The Total Amount Paid = $911363.20 
+The Total Interest Paid = $371363.20 
+ 
+ 
+Please enter a positive integer for the loan amount: 0 
+THANK YOU FOR USING THE MORTGAGE CALCULATOR!!
