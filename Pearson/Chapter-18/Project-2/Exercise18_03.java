@@ -13,8 +13,9 @@ public class Exercise18_03 {
   }
 
   public static int gcd(int m, int n) {
-    if (m % n == 0) return n;
-    return gcd(n, m % n);
+    int small = m % n;
+    if (small == 0) return n;
+    return gcd(n, small);
   }
 }
 
