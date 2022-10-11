@@ -1,0 +1,4 @@
+Enter number of stairs: 7
+Enter size of array: 3
+Enter array [separated by a space]: 1 2 4
+Total number of possibilities: 31
