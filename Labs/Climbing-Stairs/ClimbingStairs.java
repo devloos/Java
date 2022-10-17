@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
-public class ClimbingStairs {
+public class ClimbingStairs 
+
   public static void main(String[] args) {
     Scanner cin = new Scanner(System.in);
 
@@ -42,7 +43,7 @@ public class ClimbingStairs {
     return ways;
   }
 
-  // public static int count(int n, int j, int k) {
+   public static int count(int n, int j, int k) {
   //   if (n == 0) {
   //     return 1;
   //   } else if (n < 0) {
