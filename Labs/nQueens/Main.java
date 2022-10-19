@@ -1,25 +1,31 @@
 public class Main {
+  private static boolean delim = false;
   public static void main(String[] args) {
     {
       char[][] board = new char[4][4];
+      delim = false;
       findSolution(board, 0);
     }
 
     {
       char[][] board = new char[6][6];
+      delim = false;
       findSolution(board, 0);
     }
 
     {
       char[][] board = new char[8][8];
+      delim = false;
       findSolution(board, 0);
     }
   }
 
   public static void findSolution(char[][] state, int col) {
-    if (col == state.length) {
+    if (col == state.length || delim) {
+      if (delim) return;
       printBoard(state);
       System.out.println();
+      delim = true;
       return;
     }
 
