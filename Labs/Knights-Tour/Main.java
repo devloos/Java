@@ -16,7 +16,7 @@ public class Main {
     for (int row = 0; row < board.length; row++) {
       System.out.print("[ ");
       for (int col = 0; col < board[row].length; col++) {
-        System.out.printf("%02d", board[row][col]);
+        System.out.printf("%2d", board[row][col]);
         System.out.print(" ");
       }
       System.out.println("]");
