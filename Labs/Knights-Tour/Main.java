@@ -14,13 +14,13 @@ public class Main {
 
   public static void printBoard(int[][] board) {
     for (int row = 0; row < board.length; row++) {
-      System.out.print("[");
+      System.out.print("[ ");
       for (int col = 0; col < board[row].length; col++) {
-        System.out.print(" " + board[row][col]);
+        System.out.printf("%02d", board[row][col]);
+        System.out.print(" ");
       }
-      System.out.println(" ]");
+      System.out.println("]");
     }
-    System.out.println();
   }
 
   public static boolean isValid(int[][] board, int[] pos) {
@@ -45,7 +45,6 @@ public class Main {
 
   public static boolean findSolution(int[][] board, int row, int col, int counter) {
     if (counter == Math.pow(board.length, 2)) {
-      printBoard(board);
       return true;
     }
 
@@ -72,7 +71,12 @@ public class Main {
     int[][] board = new int[8][8];
     initBoard(board);
     board[0][0] = 0;
-    findSolution(board, 0, 0, 1);
+
+    if (findSolution(board, 0, 0, 1)) {
+      printBoard(board);
+    } else {
+      System.out.println("No Solution Found!");
+    }
   }
 }
 
