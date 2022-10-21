@@ -3,44 +3,13 @@ public class Main {
   // Got idea off https://www.geeksforgeeks.org/the-knights-tour-problem-backtracking-1/
   final static int xMove[] = { 1, 2, 2, 1, -1, -2, -2, -1 };
   final static int yMove[] = { 2, 1, -1, -2, -2, -1, 1, 2 };
-  public static void main(String[] args) {
-    int[][] board = new int[8][8];
-    initBoard(board);
-    board[0][0] = 0;
-    findSolution(board, 0, 0, 1);
-  }
 
   public static void initBoard(int[][] board) {
     for (int row = 0; row < board.length; row++) {
       for (int col = 0; col < board[row].length; col++) {
-        board[row][col] = -1;
+        board[row][col] = SAFE;
       }
     }
-  }
-
-  public static boolean findSolution(int[][] board, int row, int col, int counter) {
-    if (counter == Math.pow(board.length, 2)) {
-      printBoard(board);
-      return true;
-    }
-
-    int[] pos = new int[2];
-    for (int move = 0; move < 8; move++) {
-      pos[0] = row + yMove[move];
-      pos[1] = col + xMove[move];
-
-      if (isValid(board, pos)) {
-        board[pos[0]][pos[1]] = counter;
-        if (findSolution(board, pos[0], pos[1], counter + 1)) {
-          return true;
-        } 
-
-        board[pos[0]][pos[1]] = -1;
-      }
-
-    }
-
-    return false;
   }
 
   public static void printBoard(int[][] board) {
@@ -72,6 +41,38 @@ public class Main {
     }
 
     return true;
+  }
+
+  public static boolean findSolution(int[][] board, int row, int col, int counter) {
+    if (counter == Math.pow(board.length, 2)) {
+      printBoard(board);
+      return true;
+    }
+
+    int[] pos = new int[2];
+    for (int move = 0; move < 8; move++) {
+      pos[0] = row + yMove[move];
+      pos[1] = col + xMove[move];
+
+      if (isValid(board, pos)) {
+        board[pos[0]][pos[1]] = counter;
+        if (findSolution(board, pos[0], pos[1], counter + 1)) {
+          return true;
+        } 
+
+        board[pos[0]][pos[1]] = SAFE;
+      }
+
+    }
+
+    return false;
+  }
+
+  public static void main(String[] args) {
+    int[][] board = new int[8][8];
+    initBoard(board);
+    board[0][0] = 0;
+    findSolution(board, 0, 0, 1);
   }
 }
 
