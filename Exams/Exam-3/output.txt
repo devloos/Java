@@ -25,7 +25,7 @@ The day you entered was a Wednesday
 
 Enter a date in MM DD YYYY format (example: 11 1 1970 or 6 21 2011)
 2 13 1976
-The day you entered was a Saturday
+The day you entered was a Friday
 
 Enter a date in MM DD YYYY format (example: 11 1 1970 or 6 21 2011)
 2 13 1977

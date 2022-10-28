@@ -13,6 +13,7 @@ import java.util.Scanner;
 public class Calender {
   public static final int EXIT = 0;
   public static final int nDAYS_IN_YEAR = 365;
+  public static final int FEBRUARY = 2;
 
   public static final int[] MONTHS = {
     31, 28, 31, 30, 31, 30,
@@ -32,25 +33,27 @@ public class Calender {
     System.out.println("When you want exit the program enter a 0 for the month, day, or year.\n");
   }
 
-  public static int isLeapYear(int year) {
+  public static boolean isLeapYear(int year) {
     if (year % 4 != 0) {
-      return 0;
+      return false;
     }
 
     if (year % 4 == 0 && year % 100 != 0) {
-      return 1;
+      return true;
     } 
 
     if (year % 400 == 0) {
-      return 1;
+      return true;
     }
-    return 0;
+    return false;
   }
 
   public static int calculateDay(int month, int day, int year) {
     int nLeapYear = 0;
     for (int i = EPOCH.YEAR; i <= year; i++) {
-      nLeapYear += isLeapYear(i);
+      if (isLeapYear(i)) {
+        ++nLeapYear;
+      }
     }
 
     // Calculate days only up to year but not including
@@ -61,6 +64,12 @@ public class Calender {
       nDays += MONTHS[i];
     }
     nDays += day;
+
+    // Quick check to not add one more if current
+    // year is a leap year and we havent passed the day 29
+    if (isLeapYear(year) && month == FEBRUARY && day < 29) {
+      --nDays;
+    }
 
 
     // started week on thursday if 0 then back to thursday
