@@ -1,0 +1,49 @@
+Welcome to the Day Of Week calculator. This awesome program will tell you
+what day of the week you were born on!
+The program will allow you to find the day of the week for multiple dates.
+When you want exit the program enter a 0 for the month, day, or year.
+
+Enter a date in MM DD YYYY format (example: 11 1 1970 or 6 21 2011)
+6 15 2017
+The day you entered was a Thursday
+
+Enter a date in MM DD YYYY format (example: 11 1 1970 or 6 21 2011)
+6 13 2017
+The day you entered was a Tuesday
+
+Enter a date in MM DD YYYY format (example: 11 1 1970 or 6 21 2011)
+6 14 2017
+The day you entered was a Wednesday
+
+Enter a date in MM DD YYYY format (example: 11 1 1970 or 6 21 2011)
+6 16 2017
+The day you entered was a Friday
+
+Enter a date in MM DD YYYY format (example: 11 1 1970 or 6 21 2011)
+12 10 2003
+The day you entered was a Wednesday
+
+Enter a date in MM DD YYYY format (example: 11 1 1970 or 6 21 2011)
+2 13 1976
+The day you entered was a Saturday
+
+Enter a date in MM DD YYYY format (example: 11 1 1970 or 6 21 2011)
+2 13 1977
+The day you entered was a Sunday
+
+Enter a date in MM DD YYYY format (example: 11 1 1970 or 6 21 2011)
+7 2 1974
+The day you entered was a Tuesday
+
+Enter a date in MM DD YYYY format (example: 11 1 1970 or 6 21 2011)
+1 15 2003
+The day you entered was a Wednesday
+
+Enter a date in MM DD YYYY format (example: 11 1 1970 or 6 21 2011)
+10 13 2000
+The day you entered was a Friday
+
+Enter a date in MM DD YYYY format (example: 11 1 1970 or 6 21 2011)
+0 0 0
+
+THANK YOU FOR USING THE DAY OF WEEK CALCULATOR
