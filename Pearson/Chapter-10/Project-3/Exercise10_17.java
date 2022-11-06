@@ -5,6 +5,7 @@ public class Exercise10_17 {
     long n = (long)Math.sqrt(Long.MAX_VALUE) + 1;
 
     System.out.println("The ten numbers are");
+    System.out.println(n);
     for (int i = 0; i < 10; i++) {
       BigInteger t = BigInteger.valueOf(n++);
       System.out.println(t.multiply(t));
