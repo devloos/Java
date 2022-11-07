@@ -7,17 +7,19 @@ public class Exercise11_15 {
   }
 
   public static double findRadius(Vector2[] coordinates) {
-    double largestDistance = 0.0;
+    // double largestDistance = 0.0;
 
-    for (int i = 1; i < coordinates.length; i++) {
-      double n = distance(coordinates[i - 1], coordinates[i]);
+    // for (int i = 1; i < coordinates.length; i++) {
+    // double n = distance(coordinates[i - 1], coordinates[i]);
 
-      if (n > largestDistance) {
-        largestDistance = n;
-      }
-    }
+    // if (n > largestDistance) {
+    // largestDistance = n;
+    // }
+    // }
 
-    return largestDistance / 2;
+    // return largestDistance / 2;
+
+    return findLength(coordinates) / (2 * Math.tan(180.0 / coordinates.length));
   }
 
   public static double findLength(Vector2[] coordinates) {
@@ -29,11 +31,15 @@ public class Exercise11_15 {
   }
 
   public static double findApothem(Vector2[] coordinates, int n) {
-    return (findLength(coordinates)) / (double) (2.0 * Math.tan(180.0 / n));
+    return findLength(coordinates) / (double) (2.0 * Math.tan(180.0 / n));
   }
 
   public static double findAreaUsingApothem(int n, double length, double apothem) {
-    return (n * (length * apothem)) / 2.0;
+    return (n * length * apothem) / 2.0;
+  }
+
+  public static double findAreaAnotherMethod(int n, double length) {
+    return (1.0 / 4) * n * Math.pow(length, 2) * (1.0 / Math.tan(Math.PI / (double) n));
   }
 
   public static void main(String[] args) {
@@ -57,10 +63,18 @@ public class Exercise11_15 {
     }
 
     // final double RADIUS = findRadius(coordinates);
-    final double LENGTH = findLength(coordinates);
-    final double APOTHEM = findApothem(coordinates, N_POINTS);
+    // final double LENGTH = findLength(coordinates);
+    // final double APOTHEM = findApothem(coordinates, N_POINTS);
 
-    System.out.printf("The total area is %5.3f", findAreaUsingApothem(N_POINTS, LENGTH, APOTHEM));
+    // https://www.geeksforgeeks.org/area-of-a-polygon-with-given-n-ordered-vertices/
+    double area = 0;
+    int j = N_POINTS - 1;
+    for (int i = 0; i < N_POINTS; i++) {
+      area += (coordinates[j].x + coordinates[i].x) * (coordinates[j].y - coordinates[i].y);
+      j = i;
+    }
+    area = Math.abs(area / 2);
+    System.out.printf("The total area is %5.3f", area);
 
     cin.close();
   }
