@@ -6,7 +6,7 @@ public class MiniSudoku {
   static final int EMPTY_CELL = 0;
 
   public static boolean isSafe(int[][] board, int row, int col, int c) {
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < board.length; i++) {
       if (board[row][i] == c) {
         return false;
       }
@@ -23,7 +23,7 @@ public class MiniSudoku {
     for (int row = 0; row < board.length; row++) {
       for (int col = 0; col < board[row].length; col++) {
         if (board[row][col] == EMPTY_CELL) {
-          for (int c = 1; c <= 3; c++) {
+          for (int c = 1; c <= board.length; c++) {
             if (isSafe(board, row, col, c)) {
               board[row][col] = c;
               if (isSolution(board)) {
