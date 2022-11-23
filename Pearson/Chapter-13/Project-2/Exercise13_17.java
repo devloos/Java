@@ -62,7 +62,7 @@ class Complex implements Cloneable, Comparable<Complex> {
   @Override
   public String toString() {
     if (b_ == 0) {
-      return a_ + "";
+      return String.valueOf(a_);
     }
 
     return a_ + " + " + b_ + "i";
