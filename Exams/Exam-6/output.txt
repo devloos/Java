@@ -1,0 +1,196 @@
+----MENU----
+1. Add a person contact
+2. Add a professional contact
+3. Search for contact
+4. Delete Contact
+5. Print Address Book
+6. Exit
+------------
+
+
+Please enter a number (1-6):
+t
+YOU DID NOT ENTER AN INTEGER - TRY AGAIN!
+
+
+----MENU----
+1. Add a person contact
+2. Add a professional contact
+3. Search for contact
+4. Delete Contact
+5. Print Address Book
+6. Exit
+------------
+
+
+Please enter a number (1-6):
+8
+YOU DID NOT ENTER AN INTEGER BETWEEN 1 - 6. TRY AGAIN!
+
+
+----MENU----
+1. Add a person contact
+2. Add a professional contact
+3. Search for contact
+4. Delete Contact
+5. Print Address Book
+6. Exit
+------------
+
+
+Please enter a number (1-6):
+5
+--Address Book--
+--End--
+
+
+----MENU----
+1. Add a person contact
+2. Add a professional contact
+3. Search for contact
+4. Delete Contact
+5. Print Address Book
+6. Exit
+------------
+
+
+Please enter a number (1-6):
+1
+Enter firstName lastName telephone email relation
+John Doe 123-456-7890 jdoe@gmail.com brother
+Personal Contact Added!
+
+
+----MENU----
+1. Add a person contact
+2. Add a professional contact
+3. Search for contact
+4. Delete Contact
+5. Print Address Book
+6. Exit
+------------
+
+
+Please enter a number (1-6):
+2
+Enter firstName lastName telephone email occupation company
+Richard Anderson 456-789-0123 randerson@apple.com engineer Apple
+Professional Contact Added!
+
+
+----MENU----
+1. Add a person contact
+2. Add a professional contact
+3. Search for contact
+4. Delete Contact
+5. Print Address Book
+6. Exit
+------------
+
+
+Please enter a number (1-6):
+5
+--Address Book--
+John Doe
+T: jdoe@gmail.com
+E: 123-456-7890
+R: brother
+
+Richard Anderson
+T: randerson@apple.com
+E: 456-789-0123
+C: engineer
+O: Apple
+
+--End--
+
+
+----MENU----
+1. Add a person contact
+2. Add a professional contact
+3. Search for contact
+4. Delete Contact
+5. Print Address Book
+6. Exit
+------------
+
+
+Please enter a number (1-6):
+3
+Enter firstName lastName
+William howard
+Contact not found!
+
+
+----MENU----
+1. Add a person contact
+2. Add a professional contact
+3. Search for contact
+4. Delete Contact
+5. Print Address Book
+6. Exit
+------------
+
+
+Please enter a number (1-6):
+3
+Enter firstName lastName
+rIcHARd AnderSON
+Contact found:
+Richard Anderson
+T: randerson@apple.com
+E: 456-789-0123
+C: engineer
+O: Apple
+
+----MENU----
+1. Add a person contact
+2. Add a professional contact
+3. Search for contact
+4. Delete Contact
+5. Print Address Book
+6. Exit
+------------
+
+
+Please enter a number (1-6):
+4
+Enter firstName lastName
+rIchard ANDERSON
+Contact Was Deleted
+
+
+----MENU----
+1. Add a person contact
+2. Add a professional contact
+3. Search for contact
+4. Delete Contact
+5. Print Address Book
+6. Exit
+------------
+
+
+Please enter a number (1-6):
+5
+--Address Book--
+John Doe
+T: jdoe@gmail.com
+E: 123-456-7890
+R: brother
+
+--End--
+
+
+----MENU----
+1. Add a person contact
+2. Add a professional contact
+3. Search for contact
+4. Delete Contact
+5. Print Address Book
+6. Exit
+------------
+
+
+Please enter a number (1-6):
+6
+Good Bye!
