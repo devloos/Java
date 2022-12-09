@@ -1,6 +1,9 @@
-package CourseScheduler.models.people;
+package CourseScheduler.models.academics;
 
+import java.util.ArrayList;
 import java.util.UUID;
+
+import CourseScheduler.models.education.Session;
 
 public class Student extends Person {
   public Student(UUID id, String firstName, String middleName, String lastName, String email, String number,
@@ -9,6 +12,7 @@ public class Student extends Person {
     m_dateOfBirth = dateOfBirth;
     m_gpa = gpa;
     m_enrollmentDate = enrollmentDate;
+    m_sessions = new ArrayList<Session>();
   }
 
   public String getDateOfBirth() {
@@ -35,8 +39,16 @@ public class Student extends Person {
     m_enrollmentDate = enrollmentDate;
   }
 
+  public ArrayList<Session> getSessions() {
+    return m_sessions;
+  }
+
+  public void addSession(Session session) {
+    m_sessions.add(session);
+  }
+
   private String m_dateOfBirth;
   private float m_gpa;
   private String m_enrollmentDate;
-  // TODO: add vector of sessions
+  private ArrayList<Session> m_sessions;
 }

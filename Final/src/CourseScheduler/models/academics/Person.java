@@ -1,4 +1,4 @@
-package CourseScheduler.models.people;
+package CourseScheduler.models.academics;
 
 import java.util.UUID;
 

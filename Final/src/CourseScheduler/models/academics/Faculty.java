@@ -1,6 +1,10 @@
-package CourseScheduler.models.people;
+package CourseScheduler.models.academics;
 
+import java.util.ArrayList;
 import java.util.UUID;
+
+import CourseScheduler.models.education.Course;
+import CourseScheduler.models.education.Session;
 
 public class Faculty extends Person {
   public Faculty(UUID id, String firstName, String middleName, String lastName, String email, String number,
@@ -8,6 +12,8 @@ public class Faculty extends Person {
     super(id, firstName, middleName, lastName, email, number, address);
     m_hireDate = hireDate;
     m_tenured = tenured;
+    m_courses = new ArrayList<Course>();
+    m_sessions = new ArrayList<Session>();
   }
 
   public String getHireDate() {
@@ -26,6 +32,24 @@ public class Faculty extends Person {
     m_tenured = tenured;
   }
 
+  public ArrayList<Course> getCourses() {
+    return m_courses;
+  }
+
+  public void addCourse(Course course) {
+    m_courses.add(course);
+  }
+
+  public ArrayList<Session> getSessions() {
+    return m_sessions;
+  }
+
+  public void addSession(Session session) {
+    m_sessions.add(session);
+  }
+
   private String m_hireDate;
   private boolean m_tenured;
+  private ArrayList<Course> m_courses;
+  private ArrayList<Session> m_sessions;
 }
