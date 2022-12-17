@@ -117,11 +117,11 @@ abstract public class Person {
     m_address = address;
   }
 
-  private UUID m_id;
-  private String m_firstName;
-  private String m_middleName;
-  private String m_lastName;
-  private String m_email;
-  private String m_number;
-  private Address m_address;
+  protected UUID m_id;
+  protected String m_firstName;
+  protected String m_middleName;
+  protected String m_lastName;
+  protected String m_email;
+  protected String m_number;
+  protected Address m_address;
 }
