@@ -2,53 +2,11 @@ package CourseManager.models.academics;
 
 import java.util.UUID;
 
-class Address {
-  public Address(String street, String city, String state, int zip) {
-    m_street = street;
-    m_city = city;
-    m_state = state;
-    m_zip = zip;
-  }
-
-  public String getStreet() {
-    return m_street;
-  }
-
-  public void setStreet(String street) {
-    m_street = street;
-  }
-
-  public String getCity() {
-    return m_city;
-  }
-
-  public void setCity(String city) {
-    m_city = city;
-  }
-
-  public String getState() {
-    return m_state;
-  }
-
-  public void setState(String state) {
-    m_state = state;
-  }
-
-  public int getZip() {
-    return m_zip;
-  }
-
-  public void setZip(int zip) {
-    m_zip = zip;
-  }
-
-  private String m_street;
-  private String m_city;
-  private String m_state;
-  private int m_zip;
-}
-
 abstract public class Person {
+  public Person() {
+    m_address = new Address();
+  }
+
   public Person(UUID id, String firstName, String middleName, String lastName, String email, String number,
       Address address) {
     m_id = id;
@@ -115,6 +73,12 @@ abstract public class Person {
   // todo implement clonable
   public void setAddress(Address address) {
     m_address = address;
+  }
+
+  @Override
+  public String toString() {
+    return m_id.toString() + "," + m_firstName + "," + m_middleName + "," + m_lastName + "," + m_email + "," + m_number
+        + "," + m_address.toString();
   }
 
   protected UUID m_id;

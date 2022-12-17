@@ -7,6 +7,12 @@ import CourseManager.models.education.Course;
 import CourseManager.models.education.Session;
 
 public class Faculty extends Person {
+  public Faculty() {
+    super();
+    m_courses = new ArrayList<Course>();
+    m_sessions = new ArrayList<Session>();
+  }
+
   public Faculty(UUID id, String firstName, String middleName, String lastName, String email, String number,
       Address address, String hireDate, boolean tenured) {
     super(id, firstName, middleName, lastName, email, number, address);
@@ -48,8 +54,13 @@ public class Faculty extends Person {
     m_sessions.add(session);
   }
 
+  @Override
+  public String toString() {
+    return super.toString() + "," + m_hireDate + "," + Boolean.toString(m_tenured);
+  }
+
   private String m_hireDate;
-  private boolean m_tenured;
+  private boolean m_tenured = false;
   private ArrayList<Course> m_courses;
   private ArrayList<Session> m_sessions;
 }

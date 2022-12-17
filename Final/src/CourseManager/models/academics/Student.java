@@ -6,6 +6,11 @@ import java.util.UUID;
 import CourseManager.models.education.Session;
 
 public class Student extends Person {
+  public Student() {
+    super();
+    m_sessions = new ArrayList<Session>();
+  }
+
   public Student(UUID id, String firstName, String middleName, String lastName, String email, String number,
       Address address, String dateOfBirth, float gpa, String enrollmentDate) {
     super(id, firstName, middleName, lastName, email, number, address);
@@ -45,6 +50,11 @@ public class Student extends Person {
 
   public void addSession(Session session) {
     m_sessions.add(session);
+  }
+
+  @Override
+  public String toString() {
+    return super.toString() + m_dateOfBirth + "," + Float.toString(m_gpa) + "," + m_enrollmentDate;
   }
 
   private String m_dateOfBirth;
