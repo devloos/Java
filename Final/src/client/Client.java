@@ -6,9 +6,16 @@ import java.util.InputMismatchException;
 import CourseManager.*;
 
 public class Client {
-  public static void main(String[] args) throws InputMismatchException, FileNotFoundException {
+  public static void main(String[] args) {
     CourseManager mg = new CourseManager(args[0]);
-    mg.readData();
+
+    try {
+      mg.init();
+    } catch (InputMismatchException e) {
+
+    } catch (FileNotFoundException e) {
+
+    }
 
     mg.print();
     // mg.schedule()

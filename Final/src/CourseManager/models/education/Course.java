@@ -3,6 +3,10 @@ package CourseManager.models.education;
 import java.util.ArrayList;
 
 public class Course {
+  public Course() {
+    m_sessions = new ArrayList<Session>();
+  }
+
   public Course(String department, String code, String description) {
     m_id = department + code;
     m_department = department;
@@ -57,6 +61,11 @@ public class Course {
 
   public void addSession(Session session) {
     m_sessions.add(session);
+  }
+
+  @Override
+  public String toString() {
+    return m_code + "," + m_description + "," + Boolean.toString(m_cancelled);
   }
 
   private String m_id;

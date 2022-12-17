@@ -21,21 +21,27 @@ public class CourseManager {
     m_courses = new ArrayList<Course>();
   }
 
-  public void readData() throws InputMismatchException, FileNotFoundException {
+  public void init() throws InputMismatchException, FileNotFoundException {
     readFaculty();
     readStudents();
-    // readCourses();
+    readCourses();
   }
 
   public void print() {
     for (Student student : m_students) {
-      System.out.println(student.toString());
+      System.out.println(student);
     }
 
     System.out.println();
 
     for (Faculty faculty : m_faculty) {
-      System.out.println(faculty.toString());
+      System.out.println(faculty);
+    }
+
+    System.out.println();
+
+    for (Course course : m_courses) {
+      System.out.println(course);
     }
   }
 
@@ -74,7 +80,6 @@ public class CourseManager {
     }
 
     fin.close();
-
   }
 
   private void setPersonAttributes(String[] fields, Person person) {
@@ -92,10 +97,23 @@ public class CourseManager {
     address.setZip(Integer.parseInt(fields[9]));
   }
 
-  // private void readCourses() throws InputMismatchException,
-  // FileNotFoundException {
+  private void readCourses() throws InputMismatchException, FileNotFoundException {
+    Scanner fin = new Scanner(new File(m_absoluteFolderPath + "courses.db"));
 
-  // }
+    while (fin.hasNextLine()) {
+      Course course = new Course();
+      String[] fields = fin.nextLine().split(",");
+
+      course.setId(fields[0]);
+      course.setDepartment(fields[1]);
+      course.setCode(course.getId() + course.getDepartment());
+      course.setDescription(fields[2]);
+
+      m_courses.add(course);
+    }
+
+    fin.close();
+  }
 
   private ArrayList<Student> m_students;
   private ArrayList<Faculty> m_faculty;
