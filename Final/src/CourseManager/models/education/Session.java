@@ -1,9 +1,9 @@
-package CourseScheduler.models.education;
+package CourseManager.models.education;
 
 import java.util.ArrayList;
 import java.util.UUID;
 
-import CourseScheduler.models.academics.Student;
+import CourseManager.models.academics.Student;
 
 public class Session {
   public Session(UUID id, String courseId, String courseDescription, int maxNumberOfStudents, int minNumberOfStudents) {

@@ -1,10 +1,10 @@
-package CourseScheduler.models.academics;
+package CourseManager.models.academics;
 
 import java.util.ArrayList;
 import java.util.UUID;
 
-import CourseScheduler.models.education.Course;
-import CourseScheduler.models.education.Session;
+import CourseManager.models.education.Course;
+import CourseManager.models.education.Session;
 
 public class Faculty extends Person {
   public Faculty(UUID id, String firstName, String middleName, String lastName, String email, String number,

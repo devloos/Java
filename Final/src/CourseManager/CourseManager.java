@@ -1,0 +1,5 @@
+package CourseManager;
+
+class CourseManager {
+
+}

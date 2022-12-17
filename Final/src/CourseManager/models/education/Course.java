@@ -1,4 +1,4 @@
-package CourseScheduler.models.education;
+package CourseManager.models.education;
 
 import java.util.ArrayList;
 

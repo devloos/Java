@@ -1,5 +1,0 @@
-package CourseScheduler;
-
-class CourseScheduler {
-
-}
