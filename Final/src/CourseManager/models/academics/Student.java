@@ -59,8 +59,7 @@ public class Student extends Person {
     Random delimeter = new Random(System.currentTimeMillis());
     for (Course course : courses) {
       if (i < MAX_PREFERRED_COURSES && delimeter.nextBoolean()) {
-        preferredCoursesByCode[i] = course.getCode();
-        ++i;
+        m_preferredCoursesByCode[i++] = course.getCode();
       }
     }
   }
@@ -76,5 +75,5 @@ public class Student extends Person {
   private float m_gpa;
   private String m_enrollmentDate;
   private ArrayList<Session> m_sessions;
-  private String[] preferredCoursesByCode = new String[MAX_PREFERRED_COURSES];
+  private String[] m_preferredCoursesByCode = new String[MAX_PREFERRED_COURSES];
 }

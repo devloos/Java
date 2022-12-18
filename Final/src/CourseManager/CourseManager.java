@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.UUID;
+import java.util.function.BiPredicate;
 
 import CourseManager.models.academics.Address;
 import CourseManager.models.academics.Faculty;
@@ -85,6 +86,32 @@ public class CourseManager {
     }
 
     return null;
+  }
+
+  public void sortStudents(BiPredicate<Student, Student> action) {
+    for (int i = 0; i < m_students.size(); i++) {
+      int index = i;
+      for (int j = i + 1; j < m_students.size(); j++) {
+        if (action.test(m_students.get(j), m_students.get(index))) {
+          index = j;
+        }
+      }
+
+      Student temp = m_students.get(i);
+      m_students.set(i, m_students.get(index));
+      m_students.set(index, temp);
+    }
+  }
+
+  // one to sort and then schedule
+  public void schedule(BiPredicate<Student, Student> action) {
+    sortStudents(action);
+    return;
+  }
+
+  // another to sort with current arrangment of array
+  public void schedule() {
+    return;
   }
 
   private void readStudents() throws InputMismatchException, FileNotFoundException {
