@@ -1,8 +1,10 @@
 package CourseManager.models.academics;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.UUID;
 
+import CourseManager.models.education.Course;
 import CourseManager.models.education.Session;
 
 public class Student extends Person {
@@ -52,13 +54,27 @@ public class Student extends Person {
     m_sessions.add(session);
   }
 
+  public void setCoursePreference(ArrayList<Course> courses) {
+    int i = 0;
+    Random delimeter = new Random(System.currentTimeMillis());
+    for (Course course : courses) {
+      if (i < MAX_PREFERRED_COURSES && delimeter.nextBoolean()) {
+        preferredCoursesByCode[i] = course.getCode();
+        ++i;
+      }
+    }
+  }
+
   @Override
   public String toString() {
     return super.toString() + m_dateOfBirth + "," + Float.toString(m_gpa) + "," + m_enrollmentDate;
   }
 
+  final private static int MAX_PREFERRED_COURSES = 4;
+
   private String m_dateOfBirth;
   private float m_gpa;
   private String m_enrollmentDate;
   private ArrayList<Session> m_sessions;
+  private String[] preferredCoursesByCode = new String[MAX_PREFERRED_COURSES];
 }

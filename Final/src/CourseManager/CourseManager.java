@@ -22,9 +22,9 @@ public class CourseManager {
   }
 
   public void init() throws InputMismatchException, FileNotFoundException {
+    readCourses();
     readFaculty();
     readStudents();
-    readCourses();
   }
 
   public void print() {
@@ -45,6 +45,48 @@ public class CourseManager {
     }
   }
 
+  public void addStudent(Student student) {
+    m_students.add(student);
+  }
+
+  public Student removeStudentById(UUID id) {
+    for (int i = 0; i < m_students.size(); i++) {
+      if (m_students.get(i).getId().equals(id)) {
+        return m_students.remove(i);
+      }
+    }
+
+    return null;
+  }
+
+  public void addFaculty(Faculty faculty) {
+    m_faculty.add(faculty);
+  }
+
+  public Faculty removeFacultyById(UUID id) {
+    for (int i = 0; i < m_faculty.size(); i++) {
+      if (m_faculty.get(i).getId().equals(id)) {
+        return m_faculty.remove(i);
+      }
+    }
+
+    return null;
+  }
+
+  public void addCourse(Course course) {
+    m_courses.add(course);
+  }
+
+  public Course removeCourseByCode(String code) {
+    for (int i = 0; i < m_courses.size(); i++) {
+      if (m_courses.get(i).getCode().equals(code)) {
+        return m_courses.remove(i);
+      }
+    }
+
+    return null;
+  }
+
   private void readStudents() throws InputMismatchException, FileNotFoundException {
     Scanner fin = new Scanner(new File(m_absoluteFolderPath + "students.db"));
 
@@ -57,6 +99,8 @@ public class CourseManager {
       student.setDateOfBirth(fields[10]);
       student.setGpa(Float.parseFloat(fields[11]));
       student.setEnrollmentDate(fields[12]);
+
+      student.setCoursePreference(m_courses);
 
       m_students.add(student);
     }

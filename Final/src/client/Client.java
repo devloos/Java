@@ -18,7 +18,8 @@ public class Client {
     }
 
     mg.print();
-    // mg.schedule()
+    // mg.schedule([]() {
+    // });
     // potentially grab stats from course manager
   }
 }

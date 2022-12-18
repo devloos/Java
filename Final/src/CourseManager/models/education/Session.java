@@ -3,6 +3,7 @@ package CourseManager.models.education;
 import java.util.ArrayList;
 import java.util.UUID;
 
+import CourseManager.models.academics.Faculty;
 import CourseManager.models.academics.Student;
 
 public class Session {
@@ -71,11 +72,20 @@ public class Session {
     m_students.add(student);
   }
 
+  public void setInstructor(Faculty instructor) {
+    m_instructor = instructor;
+  }
+
+  public Faculty getTeacher() {
+    return m_instructor;
+  }
+
   private UUID m_id;
   private String m_courseId;
   private String m_courseDescription;
   private int m_maxNumberOfStudents;
   private int m_minNumberOfStudents;
   private boolean m_cancelled = false;
+  private Faculty m_instructor;
   private ArrayList<Student> m_students;
 }
