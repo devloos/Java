@@ -46,12 +46,20 @@ public class Faculty extends Person {
     m_courses.add(course);
   }
 
+  public boolean removeCourse(Course course) {
+    return m_courses.remove(course);
+  }
+
   public ArrayList<Session> getSessions() {
     return m_sessions;
   }
 
   public void addSession(Session session) {
     m_sessions.add(session);
+  }
+
+  public boolean removeSession(Session session) {
+    return m_sessions.remove(session);
   }
 
   @Override

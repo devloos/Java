@@ -7,10 +7,12 @@ import CourseManager.models.academics.Faculty;
 import CourseManager.models.academics.Student;
 
 public class Session {
-  public Session(UUID id, String courseId, String courseDescription, int maxNumberOfStudents, int minNumberOfStudents) {
+  public Session(UUID id, String courseId, String courseDescription, Faculty instructor, int maxNumberOfStudents,
+      int minNumberOfStudents) {
     m_id = id;
     m_courseId = courseId;
     m_courseDescription = courseDescription;
+    m_instructor = instructor;
     m_maxNumberOfStudents = maxNumberOfStudents;
     m_minNumberOfStudents = minNumberOfStudents;
     m_students = new ArrayList<Student>();
@@ -56,6 +58,10 @@ public class Session {
     m_minNumberOfStudents = minNumberOfStudents;
   }
 
+  public int getNumberOfStudents() {
+    return m_students.size();
+  }
+
   public boolean isCancelled() {
     return m_cancelled;
   }
@@ -78,6 +84,11 @@ public class Session {
 
   public Faculty getTeacher() {
     return m_instructor;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    return m_id.equals(((Session) (obj)).m_id);
   }
 
   private UUID m_id;

@@ -13,18 +13,20 @@ public class Client {
     try {
       mg.init();
     } catch (InputMismatchException e) {
-
+      System.err.println("ERROR: INPUT MISMATCH");
     } catch (FileNotFoundException e) {
-
+      System.err.println("ERROR: FILE NOT FOUND");
     }
 
-    mg.sortStudents((Student s1, Student s2) -> {
+    mg.schedule((Student s1, Student s2) -> {
       return s1.getGpa() < s2.getGpa();
     });
 
-    mg.print();
-    // mg.schedule(() -> {
-    // });
-    // potentially grab stats from course manager
+    System.out.println("Total Students: " + mg.getTotalStudents());
+    System.out.println("Total Faculty: " + mg.getTotalFaculty());
+    System.out.println("Total Courses: " + mg.getTotalCourses());
+    System.out.println("Total Sessions Scheduled: " + mg.getTotalScheduledSessions());
+    System.out.println("Total Courses (not sessions) Unscheduled: " + mg.getTotalUnscheduledCourses());
+    System.out.println("Total Students With No Classes: " + mg.getTotalStudentsNotScheduled());
   }
 }

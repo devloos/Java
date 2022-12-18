@@ -13,6 +13,7 @@ import CourseManager.models.academics.Faculty;
 import CourseManager.models.academics.Person;
 import CourseManager.models.academics.Student;
 import CourseManager.models.education.Course;
+import CourseManager.models.education.Session;
 
 public class CourseManager {
   public CourseManager(String absoluteFolderPath) {
@@ -27,23 +28,73 @@ public class CourseManager {
     readFaculty();
     readStudents();
   }
+  // for (Student student : m_students) {
+  // System.out.println(student);
+  // }
+
+  // System.out.println();
+
+  // for (Faculty faculty : m_faculty) {
+  // System.out.println(faculty);
+  // }
+
+  // System.out.println();
+
+  // for (Course course : m_courses) {
+  // System.out.println(course);
+  // }
 
   public void print() {
-    for (Student student : m_students) {
-      System.out.println(student);
-    }
 
-    System.out.println();
+  }
 
-    for (Faculty faculty : m_faculty) {
-      System.out.println(faculty);
-    }
+  public int getTotalStudents() {
+    return m_students.size();
+  }
 
-    System.out.println();
+  public int getTotalFaculty() {
+    return m_faculty.size();
+  }
+
+  public int getTotalCourses() {
+    return m_courses.size();
+  }
+
+  public int getTotalScheduledSessions() {
+    int count = 0;
 
     for (Course course : m_courses) {
-      System.out.println(course);
+      for (Session session : course.getSessions()) {
+        if (!session.isCancelled()) {
+          ++count;
+        }
+      }
     }
+
+    return count;
+  }
+
+  public int getTotalUnscheduledCourses() {
+    int count = 0;
+    for (Course course : m_courses) {
+      if (course.isCancelled()) {
+        ++count;
+      }
+    }
+
+    return count;
+  }
+
+  public int getTotalStudentsNotScheduled() {
+    int count = 0;
+
+    for (Student student : m_students) {
+      if (student.getSessions().size() <= 0) {
+        ++count;
+      }
+    }
+
+    return count;
   }
 
   public void addStudent(Student student) {
@@ -89,6 +140,10 @@ public class CourseManager {
   }
 
   public void sortStudents(BiPredicate<Student, Student> action) {
+    if (action == null) {
+      return;
+    }
+
     for (int i = 0; i < m_students.size(); i++) {
       int index = i;
       for (int j = i + 1; j < m_students.size(); j++) {
@@ -106,12 +161,63 @@ public class CourseManager {
   // one to sort and then schedule
   public void schedule(BiPredicate<Student, Student> action) {
     sortStudents(action);
-    return;
+    for (Student student : m_students) {
+      for (String coursePreference : student.getCoursePreference()) {
+        for (Course course : m_courses) {
+          if (course.getCode().equals(coursePreference)) {
+            Session session = course.returnAvailableSession();
+            // if no available sessions exist
+            if (session == null) {
+              session = new Session(UUID.randomUUID(), course.getCode(), course.getDescription(),
+                  m_faculty.get(0), 35, 20);
+              course.addSession(session);
+            }
+
+            session.addStudent(student);
+            student.addSession(session);
+            m_faculty.get(0).addCourse(course);
+            m_faculty.get(0).addSession(session);
+          }
+        }
+      }
+    }
+
+    filterSchedule();
   }
 
   // another to sort with current arrangment of array
   public void schedule() {
+    schedule(null);
     return;
+  }
+
+  private void filterSchedule() {
+    for (Course course : m_courses) {
+      if (course.getNumberOfSessions() == 0) {
+        course.setCancelled(true);
+        continue;
+      }
+
+      Session session = course.returnAvailableSession();
+      if (session == null) {
+        continue;
+      }
+
+      if (session.getNumberOfStudents() < session.getMinNumberOfStudents()) {
+        session.setCancelled(true);
+        for (Student student : session.getStudents()) {
+          student.removeSession(session);
+        }
+
+        Faculty instructor = session.getTeacher();
+        instructor.removeSession(session);
+
+        if (course.getNumberOfSessions() == 1) {
+          course.setCancelled(true);
+          instructor.removeCourse(course);
+        }
+      }
+    }
   }
 
   private void readStudents() throws InputMismatchException, FileNotFoundException {

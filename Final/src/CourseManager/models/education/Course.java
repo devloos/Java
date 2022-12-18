@@ -63,9 +63,31 @@ public class Course {
     m_sessions.add(session);
   }
 
+  public Session returnAvailableSession() {
+    if (m_sessions.isEmpty()) {
+      return null;
+    }
+
+    Session session = m_sessions.get(m_sessions.size() - 1);
+    if (session.getNumberOfStudents() <= session.getMaxNumberOfStudents()) {
+      return session;
+    }
+
+    return null;
+  }
+
+  public int getNumberOfSessions() {
+    return m_sessions.size();
+  }
+
   @Override
   public String toString() {
     return m_code + "," + m_description + "," + Boolean.toString(m_cancelled);
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    return m_code.equals(((Course) (obj)).m_code);
   }
 
   private String m_id;

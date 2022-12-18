@@ -54,6 +54,10 @@ public class Student extends Person {
     m_sessions.add(session);
   }
 
+  public boolean removeSession(Session session) {
+    return m_sessions.remove(session);
+  }
+
   public void setCoursePreference(ArrayList<Course> courses) {
     int i = 0;
     Random delimeter = new Random(System.currentTimeMillis());
@@ -62,6 +66,10 @@ public class Student extends Person {
         m_preferredCoursesByCode[i++] = course.getCode();
       }
     }
+  }
+
+  public String[] getCoursePreference() {
+    return m_preferredCoursesByCode;
   }
 
   @Override
