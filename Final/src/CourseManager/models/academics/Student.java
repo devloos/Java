@@ -79,7 +79,7 @@ public class Student extends Person {
   @Override
   public String toString() {
     return super.toString() + "DOB: " + m_dateOfBirth + "\nGPA: " + Float.toString(m_gpa) + "\nENROLLMENT DATE: "
-        + m_enrollmentDate + "\n";
+        + m_enrollmentDate;
   }
 
   final private static int MAX_PREFERRED_COURSES = 4;

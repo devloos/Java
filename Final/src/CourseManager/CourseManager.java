@@ -33,6 +33,24 @@ public class CourseManager {
     printScheduledCourseReport();
     printCancelledCoursesReport();
     printScheduledStudentsReport();
+    printUnscheduledStudentReport();
+  }
+
+  public void printUnscheduledStudentReport() {
+    for (Student student : m_students) {
+      if (student.hasNoClasses()) {
+        System.out.println(
+            "------------------------------------------------------------");
+        System.out.println(student);
+        System.out.print("PREFERRED CLASSES: ");
+        for (String preferredClasses : student.getCoursePreference()) {
+          System.out.print(preferredClasses + ", ");
+        }
+        System.out.println();
+        System.out.println(
+            "------------------------------------------------------------");
+      }
+    }
   }
 
   public void printScheduledStudentsReport() {
