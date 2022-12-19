@@ -290,7 +290,7 @@ public class CourseManager {
           // if no available sessions exist
           if (session == null) {
             Random rd = new Random(System.currentTimeMillis());
-            Faculty instructor = m_faculty.get(rd.nextInt(m_faculty.size()));
+            Faculty instructor = getRandomFaculty(rd);
             session = new Session(UUID.randomUUID(), course.getCode(), course.getDescription(),
                 instructor, rd.nextInt(5) + 26, rd.nextInt(4) + 20);
             course.addSession(session);
@@ -412,6 +412,20 @@ public class CourseManager {
     }
 
     fout.close();
+  }
+
+  private Faculty getRandomFaculty(Random rng) {
+    boolean found = false;
+    Faculty instructor = null;
+
+    while (!found) {
+      instructor = m_faculty.get(rng.nextInt(m_faculty.size()));
+      if (instructor.isAvailable()) {
+        return instructor;
+      }
+    }
+
+    return null;
   }
 
   private ArrayList<Student> m_students;

@@ -66,6 +66,10 @@ public class Faculty extends Person {
     return m_sessions.isEmpty();
   }
 
+  public boolean isAvailable() {
+    return m_sessions.size() < MAX_NUMBER_OF_SESSIONS;
+  }
+
   @Override
   public String toString() {
     return super.toString() + "HIRE DATE: " + m_hireDate + "\nIS TENURED: " + Boolean.toString(m_tenured);
@@ -75,4 +79,5 @@ public class Faculty extends Person {
   private boolean m_tenured = false;
   private ArrayList<Course> m_courses;
   private ArrayList<Session> m_sessions;
+  private final static int MAX_NUMBER_OF_SESSIONS = 4;
 }
