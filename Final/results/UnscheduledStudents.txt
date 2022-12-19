@@ -1,0 +1,33 @@
+------------------------------------------------------------
+UUID: 8d9dde24-92ea-4460-ae3c-dd6ead03b125
+FULL NAME: Parke Tarbett Giddins
+EMAIL: pgiddins1e@wp.com
+NUMBER: (361) 4321267
+ADDRESS: 58 Muir Street Corpus Christi Texas 78470
+DOB: 4/3/2009
+GPA: 1.2
+ENROLLMENT DATE: 8/5/2022
+PREFERRED CLASSES: CS1B, CS1C, MATH3B, BIO20, 
+------------------------------------------------------------
+------------------------------------------------------------
+UUID: 317d4b4f-0a9b-4413-8fbf-5a505036b509
+FULL NAME: Tawsha Parade Sawkin
+EMAIL: tsawkin12@ebay.co.uk
+NUMBER: (863) 3406809
+ADDRESS: 79745 Atwood Drive Lakeland Florida 33811
+DOB: 6/30/2001
+GPA: 1.2
+ENROLLMENT DATE: 4/25/2021
+PREFERRED CLASSES: CS1B, CS1C, MATH3B, BIO20, 
+------------------------------------------------------------
+------------------------------------------------------------
+UUID: 35a10ddb-83ba-4ef6-b7ed-398e88586a5b
+FULL NAME: Willem Cluett Svanetti
+EMAIL: wsvanetti1j@deviantart.com
+NUMBER: (413) 5828388
+ADDRESS: 3870 Dennis Terrace Springfield Massachusetts 1114
+DOB: 1/27/2012
+GPA: 1.1
+ENROLLMENT DATE: 12/26/2021
+PREFERRED CLASSES: CS1B, CS1C, MATH3B, BIO20, 
+------------------------------------------------------------

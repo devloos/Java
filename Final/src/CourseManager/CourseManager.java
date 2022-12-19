@@ -2,8 +2,11 @@ package CourseManager;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.Random;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.UUID;
 import java.util.function.BiPredicate;
@@ -16,8 +19,8 @@ import CourseManager.models.education.Course;
 import CourseManager.models.education.Session;
 
 public class CourseManager {
-  public CourseManager(String absoluteFolderPath) {
-    m_absoluteFolderPath = absoluteFolderPath;
+  public CourseManager(String dataAbsoluteFolderPath) {
+    m_dataAbsoluteFolderPath = dataAbsoluteFolderPath;
     m_students = new ArrayList<Student>();
     m_faculty = new ArrayList<Faculty>();
     m_courses = new ArrayList<Course>();
@@ -29,108 +32,137 @@ public class CourseManager {
     readStudents();
   }
 
-  public void print() {
-    printScheduledCourseReport();
-    printCancelledCoursesReport();
-    printScheduledStudentsReport();
-    printUnscheduledStudentReport();
+  public void printFacultyReport(FileWriter fout) throws IOException {
+    for (Faculty instructor : m_faculty) {
+      if (instructor.hasNoSessions()) {
+        continue;
+      }
+
+      fout.write(
+          "----------------------------------------------------------------------------------\n");
+      fout.write(instructor.toString() + "\n\n");
+
+      for (Session session : instructor.getSessions()) {
+        fout.write(String.format("%-25s %s\n", "COURSE CODE", "COURSE DESCRIPTION"));
+        fout.write(String.format("%-25s %s\n", "-----------", "------------------"));
+        fout.write(String.format("%-25s %s\n", session.getCourseId(), session.getCourseDescription()));
+
+        fout.write("\n");
+
+        fout.write(String.format("%-40s %s\n", "SESSION ID", "NUMBER OF STUDENTS"));
+        fout.write(String.format("%-40s %s\n", "----------", "------------------"));
+        fout.write(String.format("%-40s %s\n", session.getId(), session.getNumberOfStudents()));
+
+        fout.write("\n");
+      }
+
+      fout.write(
+          "----------------------------------------------------------------------------------\n");
+    }
   }
 
-  public void printUnscheduledStudentReport() {
+  public void printUnscheduledStudentReport(FileWriter fout) throws IOException {
     for (Student student : m_students) {
       if (student.hasNoClasses()) {
-        System.out.println(
-            "------------------------------------------------------------");
-        System.out.println(student);
-        System.out.print("PREFERRED CLASSES: ");
+        fout.write(
+            "------------------------------------------------------------\n");
+        fout.write(student.toString() + "\n");
+        fout.write("PREFERRED CLASSES: ");
         for (String preferredClasses : student.getCoursePreference()) {
-          System.out.print(preferredClasses + ", ");
+          fout.write(preferredClasses + ", ");
         }
-        System.out.println();
-        System.out.println(
-            "------------------------------------------------------------");
+        fout.write("\n");
+        fout.write(
+            "------------------------------------------------------------\n");
       }
     }
   }
 
-  public void printScheduledStudentsReport() {
+  public void printScheduledStudentsReport(FileWriter fout) throws IOException {
     for (Student student : m_students) {
       if (student.hasNoClasses()) {
         continue;
       }
 
-      System.out.println(
-          "-------------------------------------------------------------------------------");
+      fout.write(
+          "-------------------------------------------------------------------------------\n");
 
-      System.out.println(student);
-      System.out.println();
+      fout.write(student.toString());
+      fout.write("\n\n");
 
       for (Session session : student.getSessions()) {
-        System.out.println("COURSE CODE\t\t\t\tCOURSE DESCRIPTION");
-        System.out.println("---------\t\t\t\t------------------");
-        System.out.println(session.getCourseId() + "\t\t\t\t\t" + session.getCourseDescription());
-        System.out.println();
-        System.out.println("SESSION ID\t\t\t\tINSTRUCTOR");
-        System.out.println("----------\t\t\t\t----------");
-        System.out.println(session.getId() + "\t" + session.getTeacher().getFullName());
-        System.out.println();
+        fout.write(String.format("%-25s %s\n", "COURSE CODE", "COURSE DESCRIPTION"));
+        fout.write(String.format("%-25s %s\n", "-----------", "------------------"));
+        fout.write(String.format("%-25s %s\n", session.getCourseId(), session.getCourseDescription()));
+
+        fout.write("\n");
+
+        fout.write(String.format("%-40s %s\n", "SESSION ID", "INSTRUCTOR"));
+        fout.write(String.format("%-40s %s\n", "----------", "----------"));
+        fout.write(String.format("%-40s %s\n", session.getId(), session.getTeacher().getFullName()));
+
+        fout.write("\n");
       }
 
-      System.out.println(
-          "-------------------------------------------------------------------------------");
+      fout.write(
+          "-------------------------------------------------------------------------------\n");
 
     }
   }
 
-  public void printCancelledCoursesReport() {
+  public void printCancelledCoursesReport(FileWriter fout) throws IOException {
     for (Course course : m_courses) {
       if (!course.isCancelled()) {
         continue;
       }
 
-      System.out.println("----------------------------------------------------------------------------------------");
-      System.out.println("COURSE CODE\t\t\tCOURSE DESCRIPTION");
-      System.out.println("---------\t\t\t------------------");
-      System.out.println(course.getCode() + "\t\t\t\t" + course.getDescription());
-      System.out.println("----------------------------------------------------------------------------------------");
+      fout.write("----------------------------------------------------------------------------------------\n");
+      fout.write(String.format("%-25s %s\n", "COURSE CODE", "COURSE DESCRIPTION"));
+      fout.write(String.format("%-25s %s\n", "-----------", "------------------"));
+      fout.write(String.format("%-25s %s\n", course.getCode(), course.getDescription()));
+      fout.write("----------------------------------------------------------------------------------------\n");
     }
   }
 
-  public void printScheduledCourseReport() {
+  public void printScheduledCourseReport(FileWriter fout) throws IOException {
     for (Course course : m_courses) {
       if (course.isCancelled()) {
         continue;
       }
 
-      System.out.println(
-          "-----------------------------------------------------------------------------------------------------------------------------------------");
-      System.out.println("COURSE CODE\t\t\tCOURSE DESCRIPTION");
-      System.out.println("---------\t\t\t------------------");
-      System.out.println(course.getCode() + "\t\t\t\t" + course.getDescription());
+      fout.write(
+          "-----------------------------------------------------------------------------------------------------------------------------------------\n");
+      fout.write(String.format("%-25s %s\n", "COURSE CODE", "COURSE DESCRIPTION"));
+      fout.write(String.format("%-25s %s\n", "-----------", "------------------"));
+      fout.write(String.format("%-25s %s\n", course.getCode(), course.getDescription()));
 
-      System.out.println();
+      fout.write("\n");
 
       for (Session session : course.getSessions()) {
         if (session.isCancelled()) {
           continue;
         }
 
-        System.out.println("SESSION ID\t\t\t\tINSTRUCTOR\t\t\tINSTRUCTOR ID\t\t\t\tNUMBER OF STUDENTS");
-        System.out.println("----------\t\t\t\t----------\t\t\t-------------\t\t\t\t------------------");
-        System.out.println(session.getId() + "\t" + session.getTeacher().getFullName() + "\t\t"
-            + session.getTeacher().getId() + "\t\t" + session.getNumberOfStudents());
+        fout.write(
+            String.format("%-40s %-35s %-40s %s\n", "SESSION ID", "INSTRUCTOR", "INSTRUCTOR ID", "NUMBER OF STUDENTS"));
+        fout.write(
+            String.format("%-40s %-35s %-40s %s\n", "----------", "----------", "-------------", "------------------"));
+        fout.write(String.format("%-40s %-35s %-40s %s\n", session.getId(), session.getTeacher().getFullName(),
+            session.getTeacher().getId(), session.getNumberOfStudents()));
 
-        System.out.println();
+        fout.write("\n");
 
-        System.out.println("FULL NAME\t\t\t\t\tSTUDENT ID");
-        System.out.println("---------\t\t\t\t\t----------");
+        fout.write(String.format("%-35s %s\n", "FULL NAME", "STUDENT ID"));
+        fout.write(String.format("%-35s %s\n", "---------", "----------"));
         for (Student student : session.getStudents()) {
-          System.out.println(student.getFullName() + "\t\t\t\t" + student.getId());
+          fout.write(String.format("%-35s %s\n", student.getFullName(), student.getId()));
         }
+
+        fout.write("\n");
       }
 
-      System.out.println(
-          "-----------------------------------------------------------------------------------------------------------------------------------------");
+      fout.write(
+          "-----------------------------------------------------------------------------------------------------------------------------------------\n");
     }
   }
 
@@ -247,23 +279,27 @@ public class CourseManager {
   // one to sort and then schedule
   public void schedule(BiPredicate<Student, Student> action) {
     sortStudents(action);
+
     for (Student student : m_students) {
       for (String coursePreference : student.getCoursePreference()) {
         for (Course course : m_courses) {
-          if (course.getCode().equals(coursePreference)) {
-            Session session = course.returnAvailableSession();
-            // if no available sessions exist
-            if (session == null) {
-              session = new Session(UUID.randomUUID(), course.getCode(), course.getDescription(),
-                  m_faculty.get(0), 10, 4);
-              course.addSession(session);
-            }
-
-            session.addStudent(student);
-            student.addSession(session);
-            m_faculty.get(0).addCourse(course);
-            m_faculty.get(0).addSession(session);
+          if (!course.getCode().equals(coursePreference)) {
+            continue;
           }
+          Session session = course.returnAvailableSession();
+          // if no available sessions exist
+          if (session == null) {
+            Random rd = new Random(System.currentTimeMillis());
+            Faculty instructor = m_faculty.get(rd.nextInt(m_faculty.size()));
+            session = new Session(UUID.randomUUID(), course.getCode(), course.getDescription(),
+                instructor, rd.nextInt(5) + 26, rd.nextInt(4) + 20);
+            course.addSession(session);
+            instructor.addCourse(course);
+            instructor.addSession(session);
+          }
+
+          session.addStudent(student);
+          student.addSession(session);
         }
       }
     }
@@ -307,11 +343,11 @@ public class CourseManager {
   }
 
   private void readStudents() throws InputMismatchException, FileNotFoundException {
-    Scanner fin = new Scanner(new File(m_absoluteFolderPath + "students.db"));
+    Scanner fout = new Scanner(new File(m_dataAbsoluteFolderPath + "students.db"));
 
-    while (fin.hasNextLine()) {
+    while (fout.hasNextLine()) {
       Student student = new Student();
-      String[] fields = fin.nextLine().split(",");
+      String[] fields = fout.nextLine().split(",");
 
       setPersonAttributes(fields, student);
 
@@ -324,15 +360,15 @@ public class CourseManager {
       m_students.add(student);
     }
 
-    fin.close();
+    fout.close();
   }
 
   private void readFaculty() throws InputMismatchException, FileNotFoundException {
-    Scanner fin = new Scanner(new File(m_absoluteFolderPath + "faculty.db"));
+    Scanner fout = new Scanner(new File(m_dataAbsoluteFolderPath + "faculty.db"));
 
-    while (fin.hasNextLine()) {
+    while (fout.hasNextLine()) {
       Faculty faculty = new Faculty();
-      String[] fields = fin.nextLine().split(",");
+      String[] fields = fout.nextLine().split(",");
 
       setPersonAttributes(fields, faculty);
 
@@ -342,7 +378,7 @@ public class CourseManager {
       m_faculty.add(faculty);
     }
 
-    fin.close();
+    fout.close();
   }
 
   private void setPersonAttributes(String[] fields, Person person) {
@@ -361,11 +397,11 @@ public class CourseManager {
   }
 
   private void readCourses() throws InputMismatchException, FileNotFoundException {
-    Scanner fin = new Scanner(new File(m_absoluteFolderPath + "courses.db"));
+    Scanner fout = new Scanner(new File(m_dataAbsoluteFolderPath + "courses.db"));
 
-    while (fin.hasNextLine()) {
+    while (fout.hasNextLine()) {
       Course course = new Course();
-      String[] fields = fin.nextLine().split(",");
+      String[] fields = fout.nextLine().split(",");
 
       course.setId(fields[0]);
       course.setDepartment(fields[1]);
@@ -375,11 +411,11 @@ public class CourseManager {
       m_courses.add(course);
     }
 
-    fin.close();
+    fout.close();
   }
 
   private ArrayList<Student> m_students;
   private ArrayList<Faculty> m_faculty;
   private ArrayList<Course> m_courses;
-  private String m_absoluteFolderPath;
+  private String m_dataAbsoluteFolderPath;
 }

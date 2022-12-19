@@ -62,9 +62,13 @@ public class Faculty extends Person {
     return m_sessions.remove(session);
   }
 
+  public boolean hasNoSessions() {
+    return m_sessions.isEmpty();
+  }
+
   @Override
   public String toString() {
-    return super.toString() + "HIRE DATE: " + m_hireDate + "\nIS TENURED: " + Boolean.toString(m_tenured) + "\n";
+    return super.toString() + "HIRE DATE: " + m_hireDate + "\nIS TENURED: " + Boolean.toString(m_tenured);
   }
 
   private String m_hireDate;
