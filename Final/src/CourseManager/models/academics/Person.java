@@ -75,10 +75,15 @@ abstract public class Person {
     m_address = address;
   }
 
+  public String getFullName() {
+    return m_firstName + " " + m_middleName + " " + m_lastName;
+  }
+
   @Override
   public String toString() {
-    return m_id.toString() + "," + m_firstName + "," + m_middleName + "," + m_lastName + "," + m_email + "," + m_number
-        + "," + m_address.toString();
+    return "UUID: " + m_id.toString() + "\nFULL NAME: " + m_firstName + " " + m_middleName + " "
+        + m_lastName + "\nEMAIL: " + m_email + "\nNUMBER: " + m_number
+        + "\n" + m_address.toString() + "\n";
   }
 
   protected UUID m_id;

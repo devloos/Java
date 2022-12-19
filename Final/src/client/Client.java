@@ -18,9 +18,10 @@ public class Client {
       System.err.println("ERROR: FILE NOT FOUND");
     }
 
-    mg.schedule((Student s1, Student s2) -> {
-      return s1.getGpa() < s2.getGpa();
-    });
+    // mg.schedule((Student s1, Student s2) -> {
+    // return s1.getGpa() < s2.getGpa();
+    // });
+    mg.schedule();
 
     System.out.println("Total Students: " + mg.getTotalStudents());
     System.out.println("Total Faculty: " + mg.getTotalFaculty());
@@ -28,5 +29,8 @@ public class Client {
     System.out.println("Total Sessions Scheduled: " + mg.getTotalScheduledSessions());
     System.out.println("Total Courses (not sessions) Unscheduled: " + mg.getTotalUnscheduledCourses());
     System.out.println("Total Students With No Classes: " + mg.getTotalStudentsNotScheduled());
+
+    System.out.println();
+    mg.print();
   }
 }

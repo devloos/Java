@@ -82,7 +82,7 @@ public class Course {
 
   @Override
   public String toString() {
-    return m_code + "," + m_description + "," + Boolean.toString(m_cancelled);
+    return "\nCOURSE ID: " + m_code + " DESCRIPTION: " + m_description;
   }
 
   @Override

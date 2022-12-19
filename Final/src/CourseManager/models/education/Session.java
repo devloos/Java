@@ -87,6 +87,12 @@ public class Session {
   }
 
   @Override
+  public String toString() {
+    return "SESSION ID: " + m_id + " INSTRUCTOR: " + m_instructor.getFullName() + " INSTRUCTOR ID: "
+        + m_instructor.getId() + " NUMBER OF STUDENTS: " + getNumberOfStudents();
+  }
+
+  @Override
   public boolean equals(Object obj) {
     return m_id.equals(((Session) (obj)).m_id);
   }

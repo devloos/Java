@@ -45,7 +45,7 @@ public class Address {
 
   @Override
   public String toString() {
-    return m_street + "," + m_city + "," + m_state + "," + Integer.toString(m_zip);
+    return "ADDRESS: " + m_street + " " + m_city + " " + m_state + " " + Integer.toString(m_zip);
   }
 
   private String m_street;

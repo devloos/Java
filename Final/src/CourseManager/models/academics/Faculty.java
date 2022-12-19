@@ -64,7 +64,7 @@ public class Faculty extends Person {
 
   @Override
   public String toString() {
-    return super.toString() + "," + m_hireDate + "," + Boolean.toString(m_tenured);
+    return super.toString() + "HIRE DATE: " + m_hireDate + "\nIS TENURED: " + Boolean.toString(m_tenured) + "\n";
   }
 
   private String m_hireDate;

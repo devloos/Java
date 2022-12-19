@@ -28,24 +28,92 @@ public class CourseManager {
     readFaculty();
     readStudents();
   }
-  // for (Student student : m_students) {
-  // System.out.println(student);
-  // }
-
-  // System.out.println();
-
-  // for (Faculty faculty : m_faculty) {
-  // System.out.println(faculty);
-  // }
-
-  // System.out.println();
-
-  // for (Course course : m_courses) {
-  // System.out.println(course);
-  // }
 
   public void print() {
+    printScheduledCourseReport();
+    printCancelledCoursesReport();
+    printScheduledStudentsReport();
+  }
 
+  public void printScheduledStudentsReport() {
+    for (Student student : m_students) {
+      if (student.hasNoClasses()) {
+        continue;
+      }
+
+      System.out.println(
+          "-------------------------------------------------------------------------------");
+
+      System.out.println(student);
+      System.out.println();
+
+      for (Session session : student.getSessions()) {
+        System.out.println("COURSE CODE\t\t\t\tCOURSE DESCRIPTION");
+        System.out.println("---------\t\t\t\t------------------");
+        System.out.println(session.getCourseId() + "\t\t\t\t\t" + session.getCourseDescription());
+        System.out.println();
+        System.out.println("SESSION ID\t\t\t\tINSTRUCTOR");
+        System.out.println("----------\t\t\t\t----------");
+        System.out.println(session.getId() + "\t" + session.getTeacher().getFullName());
+        System.out.println();
+      }
+
+      System.out.println(
+          "-------------------------------------------------------------------------------");
+
+    }
+  }
+
+  public void printCancelledCoursesReport() {
+    for (Course course : m_courses) {
+      if (!course.isCancelled()) {
+        continue;
+      }
+
+      System.out.println("----------------------------------------------------------------------------------------");
+      System.out.println("COURSE CODE\t\t\tCOURSE DESCRIPTION");
+      System.out.println("---------\t\t\t------------------");
+      System.out.println(course.getCode() + "\t\t\t\t" + course.getDescription());
+      System.out.println("----------------------------------------------------------------------------------------");
+    }
+  }
+
+  public void printScheduledCourseReport() {
+    for (Course course : m_courses) {
+      if (course.isCancelled()) {
+        continue;
+      }
+
+      System.out.println(
+          "-----------------------------------------------------------------------------------------------------------------------------------------");
+      System.out.println("COURSE CODE\t\t\tCOURSE DESCRIPTION");
+      System.out.println("---------\t\t\t------------------");
+      System.out.println(course.getCode() + "\t\t\t\t" + course.getDescription());
+
+      System.out.println();
+
+      for (Session session : course.getSessions()) {
+        if (session.isCancelled()) {
+          continue;
+        }
+
+        System.out.println("SESSION ID\t\t\t\tINSTRUCTOR\t\t\tINSTRUCTOR ID\t\t\t\tNUMBER OF STUDENTS");
+        System.out.println("----------\t\t\t\t----------\t\t\t-------------\t\t\t\t------------------");
+        System.out.println(session.getId() + "\t" + session.getTeacher().getFullName() + "\t\t"
+            + session.getTeacher().getId() + "\t\t" + session.getNumberOfStudents());
+
+        System.out.println();
+
+        System.out.println("FULL NAME\t\t\t\t\tSTUDENT ID");
+        System.out.println("---------\t\t\t\t\t----------");
+        for (Student student : session.getStudents()) {
+          System.out.println(student.getFullName() + "\t\t\t\t" + student.getId());
+        }
+      }
+
+      System.out.println(
+          "-----------------------------------------------------------------------------------------------------------------------------------------");
+    }
   }
 
   public int getTotalStudents() {
@@ -169,7 +237,7 @@ public class CourseManager {
             // if no available sessions exist
             if (session == null) {
               session = new Session(UUID.randomUUID(), course.getCode(), course.getDescription(),
-                  m_faculty.get(0), 35, 20);
+                  m_faculty.get(0), 10, 4);
               course.addSession(session);
             }
 

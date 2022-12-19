@@ -72,9 +72,14 @@ public class Student extends Person {
     return m_preferredCoursesByCode;
   }
 
+  public boolean hasNoClasses() {
+    return m_sessions.isEmpty();
+  }
+
   @Override
   public String toString() {
-    return super.toString() + m_dateOfBirth + "," + Float.toString(m_gpa) + "," + m_enrollmentDate;
+    return super.toString() + "DOB: " + m_dateOfBirth + "\nGPA: " + Float.toString(m_gpa) + "\nENROLLMENT DATE: "
+        + m_enrollmentDate + "\n";
   }
 
   final private static int MAX_PREFERRED_COURSES = 4;
