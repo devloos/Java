@@ -10,18 +10,22 @@ import CourseManager.*;
 import CourseManager.models.academics.Student;
 
 public class Client {
-  private final static String SCHEDULED_COURSES_TEXT_FILE = "/Users/ca/Development/Java/Final/results/ScheduledCourseSessions.txt";
-  private final static String SCHEDULED_STUDENTS_TEXT_FILE = "/Users/ca/Development/Java/Final/results/ScheduledStudents.txt";
-  private final static String UNSCHEDULED_COURSES_TEXT_FILE = "/Users/ca/Development/Java/Final/results/UnscheduledCourseSessions.txt";
-  private final static String FACULTY_TEXT_FILE = "/Users/ca/Development/Java/Final/results/Faculty.txt";
-  private final static String UNSCHEDULED_STUDENTS_TEXT_FILE = "/Users/ca/Development/Java/Final/results/UnscheduledStudents.txt";
+  private final static String ABSOLUTE_REPORT_FOLDER_PATH = "/Users/ca/Development/Java/Final/results";
 
   private final static int GPA_ASCENDING = 0;
   private final static int GPA_DESCENDING = 1;
   private final static int LAST_NAME_ASCENDING = 2;
   private final static int LAST_NAME_DESCENDING = 3;
 
+  // since the project required running all reports here is an example usage on it
+  // this should be flexible to fit most needs, in other words if you just needed
+  // scheduled courses report you can do just that.
   private static void runReport(CourseManager mg) {
+    if (mg == null) {
+      return;
+    }
+
+    // example of getting specific reports
     System.out.println("Total Students: " + mg.getTotalStudents());
     System.out.println("Total Faculty: " + mg.getTotalFaculty());
     System.out.println("Total Courses: " + mg.getTotalCourses());
@@ -29,24 +33,25 @@ public class Client {
     System.out.println("Total Courses (not sessions) Unscheduled: " + mg.getTotalUnscheduledCourses());
     System.out.println("Total Students With No Classes: " + mg.getTotalStudentsNotScheduled());
 
+    FileWriter fin = null;
     try {
-      FileWriter fin = new FileWriter(UNSCHEDULED_STUDENTS_TEXT_FILE);
+      fin = new FileWriter(ABSOLUTE_REPORT_FOLDER_PATH + "/UnscheduledStudents.txt");
       mg.printUnscheduledStudentReport(fin);
       fin.close();
 
-      fin = new FileWriter(SCHEDULED_COURSES_TEXT_FILE);
+      fin = new FileWriter(ABSOLUTE_REPORT_FOLDER_PATH + "/ScheduledCourseSession.txt");
       mg.printScheduledCourseReport(fin);
       fin.close();
 
-      fin = new FileWriter(SCHEDULED_STUDENTS_TEXT_FILE);
+      fin = new FileWriter(ABSOLUTE_REPORT_FOLDER_PATH + "/ScheduledStudents.txt");
       mg.printScheduledStudentsReport(fin);
       fin.close();
 
-      fin = new FileWriter(UNSCHEDULED_COURSES_TEXT_FILE);
+      fin = new FileWriter(ABSOLUTE_REPORT_FOLDER_PATH + "/UnscheduledCourseSessions.txt");
       mg.printCancelledCoursesReport(fin);
       fin.close();
 
-      fin = new FileWriter(FACULTY_TEXT_FILE);
+      fin = new FileWriter(ABSOLUTE_REPORT_FOLDER_PATH + "/Faculty.txt");
       mg.printFacultyReport(fin);
       fin.close();
     } catch (IOException e) {
@@ -57,6 +62,7 @@ public class Client {
   public static void main(String[] args) {
     CourseManager mg = new CourseManager(args[0]);
 
+    // example initialization of the library
     try {
       mg.init();
     } catch (InputMismatchException e) {
@@ -67,6 +73,7 @@ public class Client {
 
     Random rng = new Random(System.currentTimeMillis());
 
+    // Example of different scheduling algorithms
     switch (rng.nextInt(4)) {
       case GPA_ASCENDING: {
         mg.schedule((Student s1, Student s2) -> {

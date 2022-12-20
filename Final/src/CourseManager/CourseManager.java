@@ -19,6 +19,11 @@ import CourseManager.models.education.Course;
 import CourseManager.models.education.Session;
 
 public class CourseManager {
+  /**
+   * no default constructor because I requiring client to give data folder path
+   * 
+   * @param dataAbsoluteFolderPath
+   */
   public CourseManager(String dataAbsoluteFolderPath) {
     m_dataAbsoluteFolderPath = dataAbsoluteFolderPath;
     m_students = new ArrayList<Student>();
@@ -26,11 +31,21 @@ public class CourseManager {
     m_courses = new ArrayList<Course>();
   }
 
+  /**
+   * the init of the lib should be ran before using any lib functions
+   * 
+   * @throws InputMismatchException
+   * @throws FileNotFoundException
+   */
   public void init() throws InputMismatchException, FileNotFoundException {
     readCourses();
     readFaculty();
     readStudents();
   }
+
+  /*
+   * REPORTING
+   */
 
   public void printFacultyReport(FileWriter fout) throws IOException {
     for (Faculty instructor : m_faculty) {
@@ -215,6 +230,10 @@ public class CourseManager {
     return count;
   }
 
+  /*
+   * REPORTING
+   */
+
   public void addStudent(Student student) {
     m_students.add(student);
   }
@@ -257,6 +276,12 @@ public class CourseManager {
     return null;
   }
 
+  /**
+   * sort students using selection sort, this function takes in a bipredicate
+   * to be the deciding factor on whether to make the index switch
+   * 
+   * @param action
+   */
   public void sortStudents(BiPredicate<Student, Student> action) {
     if (action == null) {
       return;
@@ -276,7 +301,13 @@ public class CourseManager {
     }
   }
 
-  // one to sort and then schedule
+  /**
+   * The way i set up this library is following the requirement of being
+   * as flexible as possible. This schedule function allows the user
+   * to sort the students list and from there schedule sequentially
+   * 
+   * @param action
+   */
   public void schedule(BiPredicate<Student, Student> action) {
     sortStudents(action);
 
@@ -307,12 +338,21 @@ public class CourseManager {
     filterSchedule();
   }
 
-  // another to sort with current arrangment of array
+  /**
+   * this overloaded function calls the schedule function that takes
+   * in a bipredicate but passes null so no sorting happens
+   * and however the ArrayList order is thats how we sequentially sort
+   */
   public void schedule() {
     schedule(null);
     return;
   }
 
+  /**
+   * Filter Schedule cleans out any sessions that did not meet the
+   * minimun requirement of students, with that it also cancels any
+   * courses that did not have any sessions and so down the ladder
+   */
   private void filterSchedule() {
     for (Course course : m_courses) {
       if (course.getNumberOfSessions() == 0) {
@@ -345,6 +385,9 @@ public class CourseManager {
   private void readStudents() throws InputMismatchException, FileNotFoundException {
     Scanner fout = new Scanner(new File(m_dataAbsoluteFolderPath + "students.db"));
 
+    // data is set up in a csv setup where comma is the delimeter
+    // this allows us to read line by line and use split
+    // and have it return the values as array
     while (fout.hasNextLine()) {
       Student student = new Student();
       String[] fields = fout.nextLine().split(",");
@@ -366,6 +409,9 @@ public class CourseManager {
   private void readFaculty() throws InputMismatchException, FileNotFoundException {
     Scanner fout = new Scanner(new File(m_dataAbsoluteFolderPath + "faculty.db"));
 
+    // data is set up in a csv setup where comma is the delimeter
+    // this allows us to read line by line and use split
+    // and have it return the values as array
     while (fout.hasNextLine()) {
       Faculty faculty = new Faculty();
       String[] fields = fout.nextLine().split(",");
@@ -381,6 +427,13 @@ public class CourseManager {
     fout.close();
   }
 
+  /**
+   * This is a polymorphic function that takes in any person and sets
+   * its member variables via String array
+   * 
+   * @param fields
+   * @param person
+   */
   private void setPersonAttributes(String[] fields, Person person) {
     person.setId(UUID.fromString(fields[0]));
     person.setFirstName(fields[1]);
@@ -399,6 +452,9 @@ public class CourseManager {
   private void readCourses() throws InputMismatchException, FileNotFoundException {
     Scanner fout = new Scanner(new File(m_dataAbsoluteFolderPath + "courses.db"));
 
+    // data is set up in a csv setup where comma is the delimeter
+    // this allows us to read line by line and use split
+    // and have it return the values as array
     while (fout.hasNextLine()) {
       Course course = new Course();
       String[] fields = fout.nextLine().split(",");
@@ -414,6 +470,14 @@ public class CourseManager {
     fout.close();
   }
 
+  /**
+   * Get random faculty is some what of a utility function
+   * that is used to grab a random faculty member if they are not at the limit
+   * number of sessions
+   * 
+   * @param rng
+   * @return
+   */
   private Faculty getRandomFaculty(Random rng) {
     boolean found = false;
     Faculty instructor = null;

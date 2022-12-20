@@ -63,6 +63,11 @@ public class Course {
     m_sessions.add(session);
   }
 
+  /**
+   * retuns available session, unless there is none which it then return null
+   * 
+   * @return
+   */
   public Session returnAvailableSession() {
     if (m_sessions.isEmpty()) {
       return null;
