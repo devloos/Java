@@ -348,6 +348,10 @@ public class CourseManager {
     return;
   }
 
+  public ArrayList<Student> getStudents() {
+    return m_students;
+  }
+
   /**
    * Filter Schedule cleans out any sessions that did not meet the
    * minimun requirement of students, with that it also cancels any
