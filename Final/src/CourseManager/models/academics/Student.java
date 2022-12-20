@@ -1,6 +1,7 @@
 package CourseManager.models.academics;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.UUID;
 
@@ -59,10 +60,18 @@ public class Student extends Person {
   }
 
   public void setCoursePreference(ArrayList<Course> courses) {
-    int i = 0;
     Random delimeter = new Random(System.currentTimeMillis());
-    for (Course course : courses) {
-      if (i < MAX_PREFERRED_COURSES && delimeter.nextBoolean()) {
+    for (int i = 0; i < MAX_PREFERRED_COURSES;) {
+      Course course = courses.get(delimeter.nextInt(courses.size()));
+      boolean noMatchingPreference = Arrays.stream(m_preferredCoursesByCode).anyMatch(x -> {
+        if (x == null) {
+          return true;
+        }
+
+        return !(x.equals(course.getCode()));
+      });
+
+      if (noMatchingPreference) {
         m_preferredCoursesByCode[i++] = course.getCode();
       }
     }
