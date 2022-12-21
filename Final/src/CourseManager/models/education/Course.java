@@ -74,7 +74,7 @@ public class Course {
     }
 
     Session session = m_sessions.get(m_sessions.size() - 1);
-    if (session.getNumberOfStudents() <= session.getMaxNumberOfStudents()) {
+    if (session.getNumberOfStudents() < session.getMaxNumberOfStudents()) {
       return session;
     }
 

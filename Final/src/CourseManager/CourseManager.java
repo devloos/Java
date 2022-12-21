@@ -32,7 +32,7 @@ public class CourseManager {
   }
 
   /**
-   * the init of the lib should be ran before using any lib functions
+   * the init of the lib should run before using any lib functions
    * 
    * @throws InputMismatchException
    * @throws FileNotFoundException
