@@ -23,6 +23,7 @@ public class Main extends Application {
     try {
       VBox vbox = loader.<VBox>load();
       Scene scene = new Scene(vbox, 640, 480);
+      scene.getStylesheets().add(BASE_FILE_URI + "/assets/styles.css");
       primaryStage.setScene(scene);
     } catch (IOException e) {
       System.out.println(e.getMessage());
