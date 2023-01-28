@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
@@ -7,10 +8,19 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.Button?>
 
-<VBox fx:id="root" xmlns:fx="Login-ns" spacing="5">
-  <VBox fx:id="title" />
-  <VBox fx:id="menu" spacing="10">
-    <Button styleClass="btn" text="1 Player Mode" />
-    <Button styleClass="btn" text="2 Player Mode" />
-  </VBox>
-</VBox>
+<BorderPane fx:id="root" xmlns:fx="Login-ns">
+  <top>
+    <VBox fx:id="title" />
+  </top>
+  <center>
+    <VBox fx:id="menu" spacing="15">
+      <Button styleClass="btn" text="1 Player Mode" />
+      <Button styleClass="btn" text="2 Player Mode" />
+    </VBox>
+  </center>
+  <bottom>
+    <HBox alignment="center">
+      <Label styleClass="label" text="Footer" />
+    </HBox>
+  </bottom>
+</BorderPane>

@@ -6,7 +6,7 @@ import java.net.URL;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import src.controllers.LoginController;
 
@@ -21,7 +21,7 @@ public class Main extends Application {
     loader.setController(new LoginController());
     loader.setLocation(new URL(BASE_FILE_URI + "/src/scenes/login.fxml"));
     try {
-      VBox vbox = loader.<VBox>load();
+      BorderPane vbox = loader.<BorderPane>load();
       Scene scene = new Scene(vbox, 640, 480);
       scene.getStylesheets().add(BASE_FILE_URI + "/assets/styles.css");
       primaryStage.setScene(scene);
