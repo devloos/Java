@@ -8,8 +8,7 @@
       "type": "java",
       "name": "Launch Main",
       "request": "launch",
-      "mainClass": "src.Main",
-      "vmArgs": "--module-path ~/Downloads/javafx-sdk-19.0.2.1/lib"
+      "mainClass": "src.Main"
     }
   ]
 }
