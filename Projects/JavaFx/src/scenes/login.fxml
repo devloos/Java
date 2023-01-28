@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
+
+<VBox xmlns:fx="Login-ns" fx:id="root">
+  <HBox styleClass="border" spacing="10">
+    <VBox>
+      <Label fx:id="label1" text="Email"/>
+      <TextField fx:id="email" />
+    </VBox>
+    <VBox>
+      <Label fx:id="label2" text="Password"/>
+      <TextField />
+    </VBox>
+    <Button fx:id="btn" text="Click me!" onAction="#clicked" />
+  </HBox>
+</VBox>

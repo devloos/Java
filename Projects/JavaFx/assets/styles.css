@@ -1,0 +1,27 @@
+#root {
+  -fx-background-image: url('retro_background.png');
+  -fx-background-repeat: stretch;
+  /* -fx-background-size: 900 506;
+  -fx-background-position: center center;
+  -fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0); */
+}
+
+.border {
+  -fx-border-style: solid;
+  -fx-border-width: 5px;
+  -fx-border-color: black;
+}
+
+#email {
+  -fx-pref-column-count: 25;
+}
+
+#btn {
+  -fx-background-color: rgb(45, 48, 70);
+  -fx-text-fill: white;
+  -fx-cursor: hand;
+}
+
+#btn:hover {
+  -fx-opacity: 0.6;
+}

@@ -1,4 +1,4 @@
-package src;
+package src.controllers;
 
 import javafx.event.Event;
 import javafx.fxml.FXML;

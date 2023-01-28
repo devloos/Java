@@ -8,18 +8,21 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import src.controllers.LoginController;
 
 public class Main extends Application {
+
+  public static final String BASE_FILE_URI = "file:////Users/ca/Development/Java/Projects/JavaFx";
 
   @Override
   public void start(Stage primaryStage) throws Exception {
     primaryStage.setTitle("My First JavaFX App");
     FXMLLoader loader = new FXMLLoader();
     loader.setController(new LoginController());
-    loader.setLocation(new URL("file:////Users/ca/Development/Java/Projects/JavaFx/src/fxml/login-index.fxml"));
+    loader.setLocation(new URL(BASE_FILE_URI + "/src/scenes/login.fxml"));
     try {
       VBox vbox = loader.<VBox>load();
-      Scene scene = new Scene(vbox);
+      Scene scene = new Scene(vbox, 640, 480);
       primaryStage.setScene(scene);
     } catch (IOException e) {
       System.out.println(e.getMessage());
