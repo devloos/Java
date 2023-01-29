@@ -15,21 +15,21 @@ public class Main extends Application {
   public static final String BASE_FILE_URI = "file:////Users/ca/Development/Java/Projects/JavaFx";
 
   @Override
-  public void start(Stage primaryStage) throws Exception {
-    primaryStage.setTitle("My First JavaFX App");
+  public void start(Stage window) throws Exception {
+    window.setTitle("Tic Tac Toe");
     FXMLLoader loader = new FXMLLoader();
-    loader.setController(new LoginController());
+    loader.setController(new LoginController(window));
     loader.setLocation(new URL(BASE_FILE_URI + "/src/scenes/login.fxml"));
     try {
       BorderPane vbox = loader.<BorderPane>load();
       Scene scene = new Scene(vbox, 640, 480);
-      scene.getStylesheets().add(BASE_FILE_URI + "/assets/styles.css");
-      primaryStage.setScene(scene);
+      scene.getStylesheets().add(BASE_FILE_URI + "/assets/login.css");
+      scene.getStylesheets().add(BASE_FILE_URI + "/assets/utility.css");
+      window.setScene(scene);
+      window.show();
     } catch (IOException e) {
       System.out.println(e.getMessage());
     }
-
-    primaryStage.show();
   }
 
   public static void main(String[] args) {

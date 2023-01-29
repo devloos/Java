@@ -1,0 +1,11 @@
+#root {
+  -fx-background-image: url('resources/tic-tac-toe.png');
+  -fx-background-size: 640 480;
+  -fx-background-position: center;
+}
+
+#menu {
+  -fx-pref-height: 200;
+  -fx-alignment: center;
+  -fx-margin: 10px 50px;
+}

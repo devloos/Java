@@ -8,19 +8,10 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.Button?>
 
-<BorderPane fx:id="root" xmlns:fx="Login-ns">
-  <top>
-    <VBox fx:id="title" />
-  </top>
+<BorderPane fx:id="root" xmlns:fx="Main-ns">
   <center>
     <VBox fx:id="menu" spacing="15">
-      <Button styleClass="btn" text="Single Player" />
-      <Button styleClass="btn" text="Multiplayer" onAction="#multiplayer" />
+      <Button styleClass="btn" text="PLAY FOR REALS!" />
     </VBox>
   </center>
-  <bottom>
-    <HBox alignment="center">
-      <Label styleClass="label" text="Footer" />
-    </HBox>
-  </bottom>
 </BorderPane>
