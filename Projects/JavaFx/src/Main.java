@@ -19,7 +19,7 @@ public class Main extends Application {
     window.setTitle("Tic Tac Toe");
     FXMLLoader loader = new FXMLLoader();
     loader.setController(new LoginController(window));
-    loader.setLocation(new URL(BASE_FILE_URI + "/src/scenes/login.fxml"));
+    loader.setLocation(new URL(BASE_FILE_URI + "/src/views/login.fxml"));
     try {
       BorderPane vbox = loader.<BorderPane>load();
       Scene scene = new Scene(vbox, 640, 480);

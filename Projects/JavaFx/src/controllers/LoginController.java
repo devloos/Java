@@ -28,7 +28,7 @@ public class LoginController {
     String mode = Utility.parseButtonEvent(e.getTarget().toString());
     FXMLLoader loader = new FXMLLoader();
     loader.setController(new GameController(window_m, mode));
-    loader.setLocation(new URL(Main.BASE_FILE_URI + "/src/scenes/main.fxml"));
+    loader.setLocation(new URL(Main.BASE_FILE_URI + "/src/views/main.fxml"));
     try {
       BorderPane graph = loader.<BorderPane>load();
       Scene scene = new Scene(graph, 640, 480);
