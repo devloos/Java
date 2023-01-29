@@ -14,8 +14,8 @@
   </top>
   <center>
     <VBox fx:id="menu" spacing="15">
-      <Button styleClass="btn" text="Single Player" />
-      <Button styleClass="btn" text="Multiplayer" onAction="#multiplayer" />
+      <Button styleClass="btn" text="Single Player" onAction="#userChoseMode" />
+      <Button styleClass="btn" text="Multiplayer" onAction="#userChoseMode" />
     </VBox>
   </center>
   <bottom>

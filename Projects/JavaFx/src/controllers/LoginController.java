@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import src.Main;
+import src.utilities.Utility;
 
 public class LoginController {
   private Stage window_m = null;
@@ -23,8 +24,10 @@ public class LoginController {
   }
 
   @FXML
-  public void multiplayer(Event e) throws Exception {
+  public void userChoseMode(Event e) throws Exception {
+    String mode = Utility.parseButtonEvent(e.getTarget().toString());
     FXMLLoader loader = new FXMLLoader();
+    loader.setController(new GameController(window_m, mode));
     loader.setLocation(new URL(Main.BASE_FILE_URI + "/src/scenes/main.fxml"));
     try {
       BorderPane graph = loader.<BorderPane>load();

@@ -11,7 +11,7 @@
 <BorderPane fx:id="root" xmlns:fx="Main-ns">
   <center>
     <VBox fx:id="menu" spacing="15">
-      <Button styleClass="btn" text="PLAY FOR REALS!" />
+      <Button styleClass="btn" text="PLAY FOR REALS!" onAction="#clicked" />
     </VBox>
   </center>
 </BorderPane>
