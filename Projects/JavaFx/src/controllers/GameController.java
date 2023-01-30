@@ -1,9 +1,12 @@
 package src.controllers;
 
+import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 
 import java.util.ArrayList;
+import java.util.function.Predicate;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
@@ -38,9 +41,9 @@ public class GameController {
 
   @FXML
   public void clickedGrid(MouseEvent e) {
-    Region rect = (Region) e.getPickResult().getIntersectedNode();
-    Integer col = GridPane.getColumnIndex(rect);
-    Integer row = GridPane.getRowIndex(rect);
+    Region box = (Region) e.getPickResult().getIntersectedNode();
+    Integer col = GridPane.getColumnIndex(box);
+    Integer row = GridPane.getRowIndex(box);
 
     // not an index
     if (col == null && row == null) {
@@ -55,19 +58,32 @@ public class GameController {
     // set player
     switch (currPlayer_m) {
       case PLAYER_X: {
-        rect.getStyleClass().clear();
-        rect.setStyle("-fx-background-color: darkgoldenrod");
+        box.getStyleClass().clear();
+        box.setStyle(null);
+        box.setStyle("-fx-background-color: darkgoldenrod");
         board_m.get(row).set(col, Player.PLAYER_X);
         currPlayer_m = Player.PLAYER_Y;
         break;
       }
 
       case PLAYER_Y: {
-        rect.getStyleClass().clear();
-        rect.setStyle("-fx-background-color: forestgreen");
+        box.getStyleClass().clear();
+        box.setStyle(null);
+        box.setStyle("-fx-background-color: forestgreen");
         board_m.get(row).set(col, Player.PLAYER_Y);
         currPlayer_m = Player.PLAYER_X;
         break;
+      }
+    }
+
+    if (playerWon()) {
+      GridPane grid = (GridPane) e.getSource();
+      ObservableList<Node> nodes = grid.getChildren();
+      for (int i = 0; i < nodes.size(); ++i) {
+        box = (Region) nodes.get(i);
+        box.getStyleClass().clear();
+        box.setStyle(null);
+        box.getStyleClass().add("box");
       }
     }
   }
