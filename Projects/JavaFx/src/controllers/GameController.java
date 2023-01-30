@@ -4,7 +4,6 @@ import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 
 import java.util.ArrayList;
-import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
