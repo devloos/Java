@@ -32,8 +32,6 @@ public class LoginController {
     try {
       BorderPane graph = loader.<BorderPane>load();
       Scene scene = new Scene(graph, 640, 480);
-      scene.getStylesheets().add(Main.BASE_FILE_URI + "/assets/main.css");
-      scene.getStylesheets().add(Main.BASE_FILE_URI + "/assets/utility.css");
       window_m.setScene(scene);
       window_m.show();
     } catch (IOException b) {

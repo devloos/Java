@@ -9,3 +9,7 @@
   -fx-alignment: center;
   -fx-margin: 10px 50px;
 }
+
+.box {
+  -fx-fill: red;
+}

@@ -1,7 +1,9 @@
 package src.controllers;
 
-import javafx.event.Event;
+import javafx.scene.input.MouseEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class GameController {
@@ -17,7 +19,12 @@ public class GameController {
   }
 
   @FXML
-  public void clicked(Event e) {
-    System.out.println(e);
+  public void clickedGrid(MouseEvent e) {
+    Node node = e.getPickResult().getIntersectedNode();
+    Integer col = GridPane.getColumnIndex(node);
+    Integer row = GridPane.getRowIndex(node);
+    if (col != null && row != null) {
+      System.out.println("Mouse clicked cell: " + col + " And: " + row);
+    }
   }
 }

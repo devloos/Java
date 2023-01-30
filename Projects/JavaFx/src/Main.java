@@ -23,8 +23,6 @@ public class Main extends Application {
     try {
       BorderPane vbox = loader.<BorderPane>load();
       Scene scene = new Scene(vbox, 640, 480);
-      scene.getStylesheets().add(BASE_FILE_URI + "/assets/login.css");
-      scene.getStylesheets().add(BASE_FILE_URI + "/assets/utility.css");
       window.setScene(scene);
       window.show();
     } catch (IOException e) {

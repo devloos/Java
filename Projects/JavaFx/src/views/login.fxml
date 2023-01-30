@@ -8,7 +8,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.Button?>
 
-<BorderPane fx:id="root" xmlns:fx="Login-ns">
+<BorderPane fx:id="root" xmlns:fx="Login-ns" stylesheets="@../../assets/login.css,@../../assets/utility.css">
   <top>
     <VBox fx:id="title" />
   </top>
