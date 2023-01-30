@@ -1,22 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.shape.Rectangle?>
 
 <BorderPane fx:id="root" xmlns:fx="Main-ns" stylesheets="@../../assets/main.css,@../../assets/utility.css">
+  <top>
+    <HBox alignment="center" spacing="175">
+      <VBox alignment="center">
+        <Region styleClass="player-1" prefWidth="35" maxWidth="35" prefHeight="35" maxHeight="35"/>
+        <Text text="Carlos" fill="white" />
+      </VBox>
+      <ImageView fitHeight="75" fitWidth="100">
+        <image>                                                                                    
+          <Image url="@../../assets/resources/vs.gif" />                                                       
+        </image>   
+      </ImageView>
+      <VBox alignment="center">
+        <Region styleClass="player-2" prefWidth="35" maxWidth="35" prefHeight="35" maxHeight="35"/>
+        <Text text="Bodhanwala" fill="white" />
+      </VBox>
+    </HBox>
+  </top>
   <center>
-    <GridPane hgap="8" vgap="8" alignment="center" onMouseClicked="#clickedGrid">
-      <Rectangle styleClass="box" GridPane.rowIndex="0" GridPane.columnIndex="0" width="120" height="120"/>
-      <Rectangle styleClass="box" GridPane.rowIndex="0" GridPane.columnIndex="1" width="120" height="120"/>
-      <Rectangle styleClass="box" GridPane.rowIndex="0" GridPane.columnIndex="2" width="120" height="120"/>
-      <Rectangle styleClass="box" GridPane.rowIndex="1" GridPane.columnIndex="0" width="120" height="120"/>
-      <Rectangle styleClass="box" GridPane.rowIndex="1" GridPane.columnIndex="1" width="120" height="120"/>
-      <Rectangle styleClass="box" GridPane.rowIndex="1" GridPane.columnIndex="2" width="120" height="120"/>
-      <Rectangle styleClass="box" GridPane.rowIndex="2" GridPane.columnIndex="0" width="120" height="120"/>
-      <Rectangle styleClass="box" GridPane.rowIndex="2" GridPane.columnIndex="1" width="120" height="120"/>
-      <Rectangle styleClass="box" GridPane.rowIndex="2" GridPane.columnIndex="2" width="120" height="120"/>
+    <GridPane hgap="15" vgap="15" alignment="center" onMouseClicked="#clickedGrid">
+      <Region styleClass="box" GridPane.rowIndex="0" GridPane.columnIndex="0" prefWidth="120" maxWidth="120" prefHeight="120" maxHeight="120"/>
+      <Region styleClass="box" GridPane.rowIndex="0" GridPane.columnIndex="1" prefWidth="120" maxWidth="120" prefHeight="120" maxHeight="120"/>
+      <Region styleClass="box" GridPane.rowIndex="0" GridPane.columnIndex="2" prefWidth="120" maxWidth="120" prefHeight="120" maxHeight="120"/>
+      <Region styleClass="box" GridPane.rowIndex="1" GridPane.columnIndex="0" prefWidth="120" maxWidth="120" prefHeight="120" maxHeight="120"/>
+      <Region styleClass="box" GridPane.rowIndex="1" GridPane.columnIndex="1" prefWidth="120" maxWidth="120" prefHeight="120" maxHeight="120"/>
+      <Region styleClass="box" GridPane.rowIndex="1" GridPane.columnIndex="2" prefWidth="120" maxWidth="120" prefHeight="120" maxHeight="120"/>
+      <Region styleClass="box" GridPane.rowIndex="2" GridPane.columnIndex="0" prefWidth="120" maxWidth="120" prefHeight="120" maxHeight="120"/>
+      <Region styleClass="box" GridPane.rowIndex="2" GridPane.columnIndex="1" prefWidth="120" maxWidth="120" prefHeight="120" maxHeight="120"/>
+      <Region styleClass="box" GridPane.rowIndex="2" GridPane.columnIndex="2" prefWidth="120" maxWidth="120" prefHeight="120" maxHeight="120"/>
     </GridPane>
   </center>
 </BorderPane>

@@ -11,5 +11,19 @@
 }
 
 .box {
-  -fx-fill: steelblue;
+  -fx-background-color: steelblue;
+  -fx-cursor: hand;
+}
+
+.box:hover {
+  -fx-scale-x: 1.1;
+  -fx-scale-y: 1.1;
+}
+
+.player-1 {
+  -fx-background-color: darkgoldenrod;
+}
+
+.player-2 {
+  -fx-background-color: forestgreen;
 }
