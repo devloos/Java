@@ -37,7 +37,7 @@ public class App {
         TEST_CREATE_GAME(lobbyIds);
         sleepPrint(3000);
 
-        TEST_JOIN_GAME(lobbyIds, 1033);
+        TEST_JOIN_GAME(lobbyIds, 1032);
         sleepPrint(3000);
 
         TEST_LOBBY_SCREEN();

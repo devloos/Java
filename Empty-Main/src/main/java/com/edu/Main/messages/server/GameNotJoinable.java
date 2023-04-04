@@ -5,6 +5,6 @@ import com.edu.Main.messages.MessageType;
 
 public class GameNotJoinable extends Message {
   public GameNotJoinable() {
-    super(MessageType.GameNotjoinable);
+    super(MessageType.GameNotJoinable);
   }
 }

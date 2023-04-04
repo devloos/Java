@@ -9,7 +9,7 @@ public enum MessageType {
   GameNotCreated,
   JoinGame,
   GameJoined,
-  GameNotjoinable,
+  GameNotJoinable,
   PlayerJoined,
   PlayerReady,
   AvatarSelectionStarted,
