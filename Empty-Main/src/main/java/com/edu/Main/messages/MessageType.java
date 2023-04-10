@@ -1,6 +1,7 @@
 package com.edu.Main.messages;
 
 public enum MessageType {
+  Subscribe,
   Received,
   SubscribeGameList,
   GameList,
