@@ -3,7 +3,6 @@ package com.edu.Main.server;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.net.Socket;
 
 import com.edu.Main.messages.*;
@@ -17,29 +16,31 @@ public class ServerThread extends Thread {
 
     private Socket socket = null;
     private RouterThread routerThread = null;
-    private BufferedReader input = null;
-    private PrintWriter output = null;
 
     public ServerThread(Socket socket, RouterThread routerThread) {
         this.socket = socket;
         this.routerThread = routerThread;
-        try {
-            input = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
-            output = new PrintWriter(this.socket.getOutputStream(), true);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
     public void run() {
         try {
+            BufferedReader input = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
+
             while (true) {
-                String clientMessage = input.readLine();
+                String message = input.readLine();
 
-                Packet<Message> packet = SerializerFactory.getSerializer().deserialize(clientMessage);
+                if (message == null) {
+                    continue;
+                }
 
-                routerThread.addJob(new Pair<ServerThread, Packet<Message>>(this, packet));
+                Packet<Message> packet = SerializerFactory.getSerializer().deserialize(message);
+
+                if (packet == null) {
+                    continue;
+                }
+
+                routerThread.addJob(new Pair<Socket, Packet<Message>>(socket, packet));
             }
 
         } catch (IOException e) {

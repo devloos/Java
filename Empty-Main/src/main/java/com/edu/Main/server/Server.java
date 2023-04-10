@@ -17,13 +17,11 @@ public class Server {
         RouterThread routerThread = new RouterThread();
         routerThread.start();
 
-        // create server socket
         try (ServerSocket serversocket = new ServerSocket(port)) {
-
-            // continuously accept and process incoming connections in a new thread
             while (true) {
-
                 Socket socket = serversocket.accept();
+
+                System.out.println("Socket Connected: " + socket + "\n");
 
                 ServerThread serverThread = new ServerThread(socket, routerThread);
                 serverThread.start();

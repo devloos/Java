@@ -1,18 +1,17 @@
 package com.edu.Main.messages;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@NoArgsConstructor
+@Getter
+@Setter
 public class Received extends Message {
-  public Received(boolean success) {
-    super(MessageType.Received);
-    this.success = success;
-  }
-
-  public boolean isSuccess() {
-    return success;
-  }
-
-  public void setSuccess(boolean success) {
-    this.success = success;
-  }
-
   private boolean success = false;
+
+  public Received(boolean success, String message) {
+    super(message);
+    this.success = success;
+  }
 }

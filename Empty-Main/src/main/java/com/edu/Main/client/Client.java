@@ -1,14 +1,15 @@
 package com.edu.Main.client;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-import com.edu.Main.messages.client.*;
-import com.edu.Main.messages.server.*;
 import com.edu.Main.messages.*;
 import com.edu.Main.serialize.*;
 
-import java.util.UUID;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Client {
 
@@ -17,32 +18,61 @@ public class Client {
 
     public static void main(String[] args) throws InterruptedException {
         try (Socket socket = new Socket(host, port)) {
-            UUID socketID = UUID.randomUUID();
-
             // return the output to the server : true statement is to flush the buffer
             PrintWriter output = new PrintWriter(socket.getOutputStream(), true);
+            BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
-            ClientRunnable clientRun = new ClientRunnable(socket);
+            Scanner cin = new Scanner(System.in);
+            ArrayList<String> channels = new ArrayList<>();
+            System.out.println("What channels would you like to subscribe to? (Enter \"done\" when completed)");
+            String channel = "done";
+            while (true) {
+                channel = cin.nextLine();
+                if (channel.equals("done")) {
+                    break;
+                }
+                channels.add(channel);
+            }
 
-            Thread clientThread = new Thread(clientRun);
-            clientThread.start();
+            Subscribe sub = new Subscribe(channels);
 
-            do {
-                // decide which message to send, and what data
-                CreateGame message = new CreateGame("dgeyfman");
+            Packet<Subscribe> p = new Packet<Subscribe>(sub, "/" + socket.toString());
+            output.println(SerializerFactory.getSerializer().serialize(p));
 
-                Packet packet = new Packet(message, "/abc");
-                String jsonStr = SerializerFactory.getSerializer().serialize(packet);
-                output.println(jsonStr);
+            while (true) {
+                String m = input.readLine();
 
-                // just to send packet every second instead of every frame
-                Thread.sleep(1000);
+                if (m == null) {
+                    continue;
+                }
 
-                // change this to while user doesn't want to exit the game
-            } while (true);
+                Packet<Message> packet = SerializerFactory.getSerializer().deserialize(m);
+
+                if (packet == null) {
+                    continue;
+                }
+
+                Message message = packet.getMessage();
+
+                System.out.println("\n" + message.getMessage() + "\n");
+                System.out.print("Would you like to reply? [channel/n]: ");
+
+                channel = cin.next();
+                cin.nextLine();
+                if (channel.toLowerCase().equals("n")) {
+                    continue;
+                }
+
+                System.out.print("REPLY: ");
+                m = cin.nextLine();
+                message = new Message(m);
+                packet = new Packet<Message>(message, channel);
+                output.println(SerializerFactory.getSerializer().serialize(packet));
+            }
         } catch (IOException e) {
             e.printStackTrace();
-
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
     }
 }

@@ -1,10 +1,12 @@
 package com.edu.Main.server;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.edu.Main.messages.*;
-import com.edu.Main.messages.client.*;
 import com.edu.Main.serialize.SerializerFactory;
 
 import javafx.util.Pair;
@@ -18,8 +20,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class RouterThread extends Thread {
 
-  private ArrayList<Pair<ServerThread, Packet<Message>>> jobs = new ArrayList<>();
-  private HashMap<String, ArrayList<ServerThread>> map = new HashMap<String, ArrayList<ServerThread>>();
+  private volatile ArrayList<Pair<Socket, Packet<Message>>> jobs = new ArrayList<>();
+  private HashMap<String, ArrayList<Socket>> map = new HashMap<String, ArrayList<Socket>>();
 
   @Override
   public void run() {
@@ -28,42 +30,54 @@ public class RouterThread extends Thread {
         continue;
       }
 
-      ServerThread thread = jobs.get(0).getKey();
+      Socket socket = jobs.get(0).getKey();
       Packet<Message> packet = jobs.get(0).getValue();
       Message message = packet.getMessage();
       String channel = packet.getChannel();
 
-      if (message.getType() == MessageType.Subscribe) {
+      if (message.getType().contains("Subscribe")) {
         Subscribe subscribe = (Subscribe) message;
         for (String c : subscribe.getChannels()) {
-          if (map.get(c) == null) {
-            map.put(c, new ArrayList<ServerThread>());
-          }
-          map.get(c).add(thread);
+          getSockets(c).add(socket);
         }
 
+        println(socket, new Received(true, "SERVER: You have been subscribed!"), channel);
         deleteJob();
         continue;
       }
 
-      if (map.get(channel) == null) {
-        map.put(channel, new ArrayList<ServerThread>());
+      ArrayList<Socket> list = getSockets(channel);
+
+      for (Socket s : list) {
+        println(s, message, channel);
       }
 
-      ArrayList<ServerThread> list = map.get(channel);
-
-      for (ServerThread t : list) {
-        Packet<Received> rp = new Packet<Received>(new Received(true), channel);
-        t.getOutput().println(SerializerFactory.getSerializer().serialize(rp));
-      }
+      deleteJob();
     }
   }
 
-  public synchronized void addJob(Pair<ServerThread, Packet<Message>> pair) {
+  public synchronized void addJob(Pair<Socket, Packet<Message>> pair) {
     jobs.add(pair);
   }
 
   private synchronized void deleteJob() {
     jobs.remove(0);
+  }
+
+  private ArrayList<Socket> getSockets(String channel) {
+    if (map.get(channel) == null) {
+      map.put(channel, new ArrayList<Socket>());
+    }
+    return map.get(channel);
+  }
+
+  private void println(Socket socket, Message message, String channel) {
+    Packet<Message> packet = new Packet<Message>(message, channel);
+    try {
+      PrintWriter output = new PrintWriter(socket.getOutputStream(), true);
+      output.println(SerializerFactory.getSerializer().serialize(packet));
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 }

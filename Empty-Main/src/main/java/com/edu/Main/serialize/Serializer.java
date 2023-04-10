@@ -35,7 +35,6 @@ public class Serializer<T extends Message> {
             javaType = mapper.getTypeFactory().constructParametricType(Packet.class, Class.forName(type));
 
             return mapper.readValue(jsonStr, javaType);
-
         } catch (IOException e) {
             e.printStackTrace();
             return null;
