@@ -15,11 +15,9 @@ import lombok.Getter;
 public class ServerThread extends Thread {
 
     private Socket socket = null;
-    private RouterThread routerThread = null;
 
-    public ServerThread(Socket socket, RouterThread routerThread) {
+    public ServerThread(Socket socket) {
         this.socket = socket;
-        this.routerThread = routerThread;
     }
 
     @Override
@@ -40,7 +38,7 @@ public class ServerThread extends Thread {
                     continue;
                 }
 
-                routerThread.addJob(new Pair<Socket, Packet<Message>>(socket, packet));
+                RouterThread.addJob(new Pair<Socket, Packet<Message>>(socket, packet));
             }
 
         } catch (IOException e) {

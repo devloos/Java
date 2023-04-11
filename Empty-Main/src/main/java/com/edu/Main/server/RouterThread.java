@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class RouterThread extends Thread {
 
-  private volatile ArrayList<Pair<Socket, Packet<Message>>> jobs = new ArrayList<>();
+  private static volatile ArrayList<Pair<Socket, Packet<Message>>> jobs = new ArrayList<>();
   private HashMap<String, ArrayList<Socket>> map = new HashMap<String, ArrayList<Socket>>();
 
   @Override
@@ -38,10 +38,16 @@ public class RouterThread extends Thread {
       if (message.getType().contains("Subscribe")) {
         Subscribe subscribe = (Subscribe) message;
         for (String c : subscribe.getChannels()) {
-          getSockets(c).add(socket);
+          ArrayList<Socket> list = getSockets(c);
+
+          for (Socket s : list) {
+            println(s, new Message(c + " User: " + subscribe.getUsername() + " has joined channel! (Server)"), channel);
+          }
+
+          list.add(socket);
+          println(socket, new Received(true, c + " You have been subscribed! (Server)"), channel);
         }
 
-        println(socket, new Received(true, "SERVER: You have been subscribed!"), channel);
         deleteJob();
         continue;
       }
@@ -49,18 +55,20 @@ public class RouterThread extends Thread {
       ArrayList<Socket> list = getSockets(channel);
 
       for (Socket s : list) {
-        println(s, message, channel);
+        if (s != socket) {
+          println(s, message, channel);
+        }
       }
 
       deleteJob();
     }
   }
 
-  public synchronized void addJob(Pair<Socket, Packet<Message>> pair) {
+  public static synchronized void addJob(Pair<Socket, Packet<Message>> pair) {
     jobs.add(pair);
   }
 
-  private synchronized void deleteJob() {
+  private static synchronized void deleteJob() {
     jobs.remove(0);
   }
 

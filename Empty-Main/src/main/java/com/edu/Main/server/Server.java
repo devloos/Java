@@ -21,9 +21,9 @@ public class Server {
             while (true) {
                 Socket socket = serversocket.accept();
 
-                System.out.println("Socket Connected: " + socket + "\n");
+                System.out.println("Socket Connected: " + socket);
 
-                ServerThread serverThread = new ServerThread(socket, routerThread);
+                ServerThread serverThread = new ServerThread(socket);
                 serverThread.start();
             }
 
