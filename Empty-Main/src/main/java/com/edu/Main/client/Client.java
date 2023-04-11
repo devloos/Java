@@ -14,7 +14,7 @@ import java.util.Scanner;
 public class Client {
 
     public static final int port = 8000;
-    public static final String host = "192.168.0.63";
+    public static final String host = "localhost";
 
     public static final String RESET = "\u001B[0m";
     public static final String BLUE = "\u001B[34m";
